@@ -330,7 +330,7 @@ entityDef projectile_rocket
 	"def_damage"				"damage_rocketDirect"
 	"def_splash_damage"			"damage_rocketSplash"
 																											
-	"speed"						"900"
+	"speed"						"40"
 	"fuse"						"6"
 	"push"						"48000"
 	
@@ -369,7 +369,7 @@ entityDef projectile_rocket_mp
 {
 	"inherit"					"projectile_rocket"
 	"predictTime"				"50"
-	"speed"						"935"
+	"speed"						"40"
 	"size"						"5 5 5"
 	"no_impact_prediction"		"1"
 }
