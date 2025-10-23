@@ -3761,6 +3761,7 @@ idMultiplayerGame::StartMenu
 ================
 */
 idUserInterface* idMultiplayerGame::StartMenu( void ) {
+	gameLocal.Printf("startmenu() was called on line 3764 of mpgame\n");
 	if ( mainGui == NULL ) {
 		return NULL;
 	}
@@ -9124,13 +9125,15 @@ idMultiplayerGame::OpenLocalBuyMenu
 */
 void idMultiplayerGame::OpenLocalBuyMenu( void )
 {
+	gameLocal.Printf("opening buy menu this is in the mpgame version\n");
 	// Buy menu work in progress
 	//if ( gameLocal.mpGame.GetCurrentMenu() == 4 )
 	//{	
 	//		return;
 	//}
 
-	if ( currentMenu == 4 )
+	if (currentMenu == 4)
+		gameLocal.Printf("menu already open?\n");
 		return; // Already open
 
 	gameLocal.sessionCommand = "game_startmenu";
@@ -9182,7 +9185,7 @@ idMultiplayerGame::IsBuyingAllowedInTheCurrentGameMode
 */
 bool idMultiplayerGame::IsBuyingAllowedInTheCurrentGameMode( void ) {
 	if ( !gameLocal.isMultiplayer ) {
-		return false;
+		return true;
 	}
 
 	if ( gameLocal.gameType != GAME_TOURNEY ) {

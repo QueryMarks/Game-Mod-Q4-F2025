@@ -2924,7 +2924,8 @@ void Cmd_AddIcon_f( const idCmdArgs& args ) {
 // squirrel: Mode-agnostic buymenus
 void Cmd_ToggleBuyMenu_f( const idCmdArgs& args ) {
 	idPlayer* player = gameLocal.GetLocalPlayer();
-	if ( player && player->CanBuy() )
+	//if ( player && player->CanBuy() )
+	if (player)
 	{
 		gameLocal.mpGame.OpenLocalBuyMenu();
 	}
@@ -3021,6 +3022,15 @@ void Cmd_CheckSave_f( const idCmdArgs &args );
 void Cmd_ShuffleTeams_f( const idCmdArgs& args ) {
 	gameLocal.mpGame.ShuffleTeams();
 }
+
+//ETHELYN BEGIN
+void Cmd_TestCardGui(const idCmdArgs& args) {
+	common->Printf("Displaying Card Game GUI");
+	gameLocal.sessionCommand = "game_startmenu";
+}
+
+
+//ETHELYN END
 
 #ifndef _FINAL
 void Cmd_ClientOverflowReliable_f( const idCmdArgs& args ) {
@@ -3233,7 +3243,10 @@ void idGameLocal::InitConsoleCommands( void ) {
 	cmdSystem->AddCommand( "buy",					Cmd_BuyItem_f,				CMD_FL_GAME,				"Buy an item (if in a buy zone and the game type supports it)" );
 // RITUAL END
 
+// ETHELYN START
+	cmdSystem->AddCommand( "testCardGui",           Cmd_TestCardGui,            CMD_FL_GAME|CMD_FL_CHEAT,   "Displays card game GUI");
 }
+//ETHELYN END
 
 /*
 =================

@@ -3518,6 +3518,7 @@ idMultiplayerGame::StartMenu
 ================
 */
 idUserInterface* idMultiplayerGame::StartMenu( void ) {
+	gameLocal.Printf("startmenu() was called on line 3521 of game\n");
 	if ( mainGui == NULL ) {
 		return NULL;
 	}
@@ -3527,7 +3528,6 @@ idUserInterface* idMultiplayerGame::StartMenu( void ) {
 	} else {
 		mainGui->SetStateInt( "password_valid", 0 );
 	}
-
 	int i, j;
 
 	if ( currentMenu ) {
@@ -3546,11 +3546,12 @@ idUserInterface* idMultiplayerGame::StartMenu( void ) {
 	if( gameLocal.GetLocalPlayer() ) {
 		gameLocal.GetLocalPlayer()->disableHud = true;
 	}
-
 	nextMenu = 0;
 	if ( currentMenu == 1 ) {
 		UpdateMainGui();
-
+		gameLocal.Printf("made it to 3552");
+		gameLocal.Printf("current menu is %d", currentMenu);
+		return NULL;
 		// UpdateMainGui sets most things, but it doesn't set these because
 		// it'd be pointless and/or harmful to set them every frame (for various reasons)
 		// Currenty the gui doesn't update properly if they change anyway, so we'll leave it like this.
@@ -9065,11 +9066,11 @@ void idMultiplayerGame::OpenLocalBuyMenu( void )
 	//{	
 	//		return;
 	//}
-
+	gameLocal.Printf("opening buy menu\n");
 	if ( currentMenu == 4 )
 		return; // Already open
 
-	gameLocal.sessionCommand = "game_startmenu";
+	gameLocal.StartMenu();
 	gameLocal.mpGame.nextMenu = 4;
 }
 
@@ -9118,7 +9119,7 @@ idMultiplayerGame::IsBuyingAllowedInTheCurrentGameMode
 */
 bool idMultiplayerGame::IsBuyingAllowedInTheCurrentGameMode( void ) {
 	if ( !gameLocal.isMultiplayer ) {
-		return false;
+		return true;
 	}
 
 	if ( gameLocal.gameType != GAME_TOURNEY ) {
@@ -9136,7 +9137,8 @@ idMultiplayerGame::IsBuyingAllowedRightNow
 */
 bool idMultiplayerGame::IsBuyingAllowedRightNow( void )
 {
-	return ( IsBuyingAllowedInTheCurrentGameMode() && isBuyingAllowedRightNow );
+	//return ( IsBuyingAllowedInTheCurrentGameMode() && isBuyingAllowedRightNow );
+	return (true);
 }
 
 

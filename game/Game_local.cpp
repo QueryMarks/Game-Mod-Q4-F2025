@@ -3967,9 +3967,11 @@ idGameLocal::StartMenu
 ================
 */
 idUserInterface* idGameLocal::StartMenu( void ) {
-	if ( !isMultiplayer ) {
-		return NULL;
-	}
+	/*if (!isMultiplayer) {
+		gameLocal.Printf("Don't call this outside of multiplayer, I guess\n)");
+		return false;
+	}*/
+	gameLocal.Printf("startmenu() was called\n");
 	return mpGame.StartMenu();
 }
 

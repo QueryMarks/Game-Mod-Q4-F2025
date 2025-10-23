@@ -1728,7 +1728,8 @@ void idGameLocal::MapRestart( int instance ) {
 
 		SetGameType();
 
-		mpGame.isBuyingAllowedRightNow = false;
+		mpGame.
+			= false;
 
 		if ( i != newInfo.GetNumKeyVals() ) {
 			gameLocal.sessionCommand = "nextMap";
@@ -4146,8 +4147,9 @@ idGameLocal::StartMenu
 ================
 */
 idUserInterface* idGameLocal::StartMenu( void ) {
+	gameLocal.Printf("startmenu() was called on line 4150 of mpgame\n");
 	if ( !isMultiplayer ) {
-		return NULL;
+		gameLocal.Printf("it is okay to open the menu even outside of multiplayer. this is being called in mpgame\n");
 	}
 	return mpGame.StartMenu();
 }
