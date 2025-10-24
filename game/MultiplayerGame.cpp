@@ -3483,9 +3483,10 @@ idMultiplayerGame::SetupBuyMenuItems
 void idMultiplayerGame::SetupBuyMenuItems()
 {
 	idPlayer* player = gameLocal.GetLocalPlayer();
-	if ( !player ) 
+	if (!player)
+		gameLocal.Printf("no player in SetupBuyMenuItems\n");
 		return;
-
+	gameLocal.Printf("SetupBuyMenuItems is running\n");
 	buyMenu->SetStateInt( "buyStatus_shotgun", player->ItemBuyStatus( "weapon_shotgun" ) );
 	buyMenu->SetStateInt( "buyStatus_hyperblaster", player->ItemBuyStatus( "weapon_hyperblaster" ) );
 	buyMenu->SetStateInt( "buyStatus_grenadelauncher", player->ItemBuyStatus( "weapon_grenadelauncher" ) );
@@ -3538,7 +3539,7 @@ idUserInterface* idMultiplayerGame::StartMenu( void ) {
 			currentMenu = nextMenu;
 		} else {
 			// for default and explicit
-			currentMenu = 1;
+			currentMenu = 4;
 		}
  		cvarSystem->SetCVarBool( "ui_chat", true );
 	}
@@ -3714,6 +3715,7 @@ idUserInterface* idMultiplayerGame::StartMenu( void ) {
 // squirrel: Mode-agnostic buymenus
 	} else if ( currentMenu == 4 ) {
 		//if( mpClientGameState.gameState.currentState == COUNTDOWN ) {
+			gameLocal.Printf("we are in current menu is 4 buy menu\n");
 			idPlayer* player = gameLocal.GetLocalPlayer();
 			buyMenu->SetStateString( "field_credits", va("%i", (int)player->buyMenuCash) );
 			buyMenu->SetStateInt( "price_shotgun", player->GetItemCost("weapon_shotgun") );
@@ -3735,6 +3737,13 @@ idUserInterface* idMultiplayerGame::StartMenu( void ) {
 			buyMenu->SetStateInt( "price_special2", player->GetItemCost( "damage_boost" ) );
 			SetupBuyMenuItems();
 			buyMenu->Activate(true, gameLocal.time);
+			gameLocal.Printf("buy menu part of StartMenu is complete\n");
+			if (!buyMenu) {
+				gameLocal.Printf("there is no buy menu\n");
+			}
+			if (buyMenu) {
+				gameLocal.Printf("buy menu is real\n");
+			}
 			return buyMenu;
 		//}
 // RITUAL END
@@ -9069,9 +9078,15 @@ void idMultiplayerGame::OpenLocalBuyMenu( void )
 	gameLocal.Printf("opening buy menu\n");
 	if ( currentMenu == 4 )
 		return; // Already open
-
-	gameLocal.StartMenu();
+	buyMenu = uiManager->FindGui("guis/newbuymenu.gui", true, false, true);
+	if (gameLocal.GetLocalPlayer()) {
+		gameLocal.GetLocalPlayer()->disableHud = true;
+	}
+	buyMenu->SetStateBool("gameDraw", true);
+	buyMenu->Activate(true, gameLocal.time);
+	assert(buymenu);
 	gameLocal.mpGame.nextMenu = 4;
+	//gameLocal.StartMenu();
 }
 
 /*	

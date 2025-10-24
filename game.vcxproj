@@ -211,6 +211,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BattlerCard.cpp" />
+    <ClCompile Include="Card.cpp" />
     <ClCompile Include="game\Actor.cpp" />
     <ClCompile Include="game\AF.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DebugInline|Win32'">Create</PrecompiledHeader>
@@ -376,6 +378,8 @@
     <ClCompile Include="game\WorldSpawn.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BattlerCard.h" />
+    <ClInclude Include="Card.h" />
     <ClInclude Include="game\Actor.h" />
     <ClInclude Include="game\AF.h" />
     <ClInclude Include="game\AFEntity.h" />

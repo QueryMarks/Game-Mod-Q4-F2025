@@ -37,6 +37,9 @@
     <Filter Include="Game\MP\Stats">
       <UniqueIdentifier>{18cb5aec-05cb-431a-9dfd-d81134d88080}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game\Card">
+      <UniqueIdentifier>{4904735a-3ff3-456b-8011-733c9b78ace0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game\Actor.cpp">
@@ -516,6 +519,12 @@
     <ClCompile Include="game\mp\stats\StatWindow.cpp">
       <Filter>Game\MP\Stats</Filter>
     </ClCompile>
+    <ClCompile Include="Card.cpp">
+      <Filter>Game\Card</Filter>
+    </ClCompile>
+    <ClCompile Include="BattlerCard.cpp">
+      <Filter>Game\Card</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game\Actor.h">
@@ -829,6 +838,12 @@
     </ClInclude>
     <ClInclude Include="game\mp\stats\StatWindow.h">
       <Filter>Game\MP\Stats</Filter>
+    </ClInclude>
+    <ClInclude Include="Card.h">
+      <Filter>Game\Card</Filter>
+    </ClInclude>
+    <ClInclude Include="BattlerCard.h">
+      <Filter>Game\Card</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
