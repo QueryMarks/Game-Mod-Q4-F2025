@@ -4,8 +4,12 @@
 
 class BattlerCard:public Card{
 public:
-	const int hp;
-	const int maxHP;
-	const int atk;
-	const int tributes = 0;
+
+	BattlerCard();
+
+	int hp;
+	int maxHP;
+	int atk;
+	int tributes;
+	idStr description;
 };

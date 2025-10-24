@@ -5,4 +5,8 @@
 
 #include "Card.h"
 
+
+Card::Card() {
+
+}
 idStr description = "pizza pie";

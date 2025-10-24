@@ -2,5 +2,11 @@
 #pragma hdrstop
 #include "BattlerCard.h"
 
-int maxHP = 3;
-int atk = 3;
+BattlerCard::BattlerCard() :
+	atk(0),
+	hp(0),
+	maxHP(0),
+	tributes(0),
+	description("Hello Worldb"){
+
+}

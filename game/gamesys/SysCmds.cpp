@@ -31,6 +31,7 @@
 #include "NoGameTypeInfo.h"
 #endif
 
+#include "..\..\BattlerCard.h"
 /*
 ==================
 Cmd_GetFloatArg
@@ -3029,6 +3030,17 @@ void Cmd_TestCardGui(const idCmdArgs& args) {
 	gameLocal.sessionCommand = "game_startmenu";
 }
 
+void Cmd_TestCardStats(const idCmdArgs& args) {
+	common->Printf("Displaying example card's stats\n");
+	BattlerCard card;
+
+	card.atk = 5;
+	card.maxHP = 10;
+	
+	common->Printf("Card's attack is %d\n", card.atk);
+	common->Printf("Card's max HP is %d\n", card.maxHP);
+	common->Printf("Card's description is %s\n", card.description.c_str());
+}
 
 //ETHELYN END
 
@@ -3245,6 +3257,7 @@ void idGameLocal::InitConsoleCommands( void ) {
 
 // ETHELYN START
 	cmdSystem->AddCommand( "testCardGui",           Cmd_TestCardGui,            CMD_FL_GAME|CMD_FL_CHEAT,   "Displays card game GUI");
+	cmdSystem->AddCommand( "testCardStats",          Cmd_TestCardStats,          CMD_FL_GAME|CMD_FL_CHEAT, "Prints data about an example card");
 }
 //ETHELYN END
 
