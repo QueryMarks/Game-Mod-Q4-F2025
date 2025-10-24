@@ -11,5 +11,6 @@ public:
 	int maxHP;
 	int atk;
 	int tributes;
+	idStr name;
 	idStr description;
 };

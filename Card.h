@@ -4,7 +4,7 @@ class Card {
 public:
 
 	Card();
-
-	const idStr description;
+	idStr name;
+	idStr description;
 
 };

@@ -7,6 +7,7 @@ BattlerCard::BattlerCard() :
 	hp(0),
 	maxHP(0),
 	tributes(0),
-	description("Hello Worldb"){
+	name("Cardio"),
+	description("Hello Worldb?"){
 
 }
