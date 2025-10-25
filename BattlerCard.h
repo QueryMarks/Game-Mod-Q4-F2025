@@ -6,6 +6,7 @@ class BattlerCard:public Card{
 public:
 
 	BattlerCard();
+	BattlerCard(idStr namex, idStr descriptionx, int atkx, int maxHPx, int tributesx);
 
 	int hp;
 	int maxHP;

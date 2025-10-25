@@ -1,7 +1,6 @@
 
 #include "../../idlib/precompiled.h"
 #pragma hdrstop
-
 #include "../Game_local.h"
 // RAVEN BEGIN
 #include "../ai/AI.h"
@@ -32,6 +31,7 @@
 #endif
 
 #include "..\..\BattlerCard.h"
+#include "..\..\CardGameManager.h"
 /*
 ==================
 Cmd_GetFloatArg
@@ -43,6 +43,8 @@ float Cmd_GetFloatArg( const idCmdArgs &args, int &argNum ) {
 	value = args.Argv( argNum++ );
 	return atof( value );
 }
+
+CardGameManager cardGameManager = CardGameManager();
 
 /*
 ===================
@@ -3032,16 +3034,35 @@ void Cmd_TestCardGui(const idCmdArgs& args) {
 
 void Cmd_TestCardStats(const idCmdArgs& args) {
 	common->Printf("Displaying example card's stats\n");
-	BattlerCard card;
-
-	card.atk = 5;
-	card.maxHP = 10;
-	
+	Card card = cardGameManager.cardPool[0];
+	//common->Printf("Card manager's string is %s\n", cardGameManager.testString.c_str());
+	/*Card cards[3] = {
+		Card("Testo", "This is a testy testo card", true, 5, 5, 1),
+		Card(),
+		Card()
+	};
+	Card card = cards[0];*/
+	common->Printf("Card's name is %s\n", card.name.c_str());
 	common->Printf("Card's attack is %d\n", card.atk);
 	common->Printf("Card's max HP is %d\n", card.maxHP);
 	common->Printf("Card's description is %s\n", card.description.c_str());
 }
 
+void Cmd_UpdateCardStats(const idCmdArgs& args) {
+	common->Printf("test\n");
+	idUserInterface* mainMenu = uiManager->FindGui("guis/mainmenu.gui", true, false, true);
+	if (mainMenu == NULL) {
+		common->Printf("Failed to get mainMenu\n");
+	}
+	else {
+		Card card = cardGameManager.cardPool[0];
+		common->Printf("%s \n\n\nA%d   %d/%d", card.name.c_str(), card.atk, card.hp, card.maxHP);
+		idStr cardString = card.name.c_str() + idStr("\n\n\n\nA") + idStr(card.atk) + idStr("  H") + idStr(card.hp) + idStr("/") + idStr(card.maxHP);
+		mainMenu->SetStateString("card_text_1", cardString.c_str());
+	}
+	
+	
+}
 //ETHELYN END
 
 #ifndef _FINAL
@@ -3256,8 +3277,10 @@ void idGameLocal::InitConsoleCommands( void ) {
 // RITUAL END
 
 // ETHELYN START
+	
 	cmdSystem->AddCommand( "testCardGui",           Cmd_TestCardGui,            CMD_FL_GAME|CMD_FL_CHEAT,   "Displays card game GUI");
 	cmdSystem->AddCommand( "testCardStats",          Cmd_TestCardStats,          CMD_FL_GAME|CMD_FL_CHEAT, "Prints data about an example card");
+	cmdSystem->AddCommand( "updateCardStats",       Cmd_UpdateCardStats,        CMD_FL_GAME|CMD_FL_CHEAT, "Updates card stats");
 }
 //ETHELYN END
 

@@ -1014,6 +1014,22 @@ windowDef Desktop
 				textscale	.22
 				font	"fonts/lowpixel"
 			}
+			windowDef btn_help
+			{
+				rect	281,85,111,30
+				visible	1
+				backcolor	0,1,0.247,0.427
+				forecolor	1,1,1,1
+				text	"Mod Help"
+				textscale	0.5
+				font	"fonts/chain"
+
+				onAction {
+					set "p_help::visible" "1" ;
+					set "btn_help::visible" "0" ;
+				}
+
+			}
 		}
 		windowDef d_main
 		{
@@ -13099,7 +13115,7 @@ windowDef Desktop
 					rect	222,75,390,93
 					visible	1
 					forecolor	1,1,1,0
-					text	"QUAKE 4 is an id Software game and is powered by id Software's DOOM 3® technology. Production, development, and technical assistance have been provided by id Software, with specific contributions by:"
+					text	"QUAKE 4 is an id Software game and is powered by id Software's DOOM 3  technology. Production, development, and technical assistance have been provided by id Software, with specific contributions by:"
 					textscale	0.25
 					font	"fonts/lowpixel"
 				}
@@ -13270,7 +13286,7 @@ windowDef Desktop
 					rect	222,78,390,93
 					visible	1
 					forecolor	1,1,1,0
-					text	"QUAKE 4 is an id Software game and is powered by id Software's DOOM 3® technology. Production, development, and technical assistance have been provided by id Software, with specific contributions by:"
+					text	"QUAKE 4 is an id Software game and is powered by id Software's DOOM 3  technology. Production, development, and technical assistance have been provided by id Software, with specific contributions by:"
 					textscale	0.28
 					font	"fonts/strogg"
 				}
@@ -15238,7 +15254,7 @@ windowDef Desktop
 					rect	103,355,542,72
 					visible	1
 					forecolor	1,1,1,0
-					text	"Quake 4 uses Miles Sound System.\nCopyright © 1991-2003 by RAD Game Tools, Inc."
+					text	"Quake 4 uses Miles Sound System.\nCopyright   1991-2003 by RAD Game Tools, Inc."
 					textscale	.31
 					font	"fonts/lowpixel"
 				}
@@ -15870,6 +15886,20 @@ windowDef Desktop
 					background	"gfx/guis/mainmenu/corner"
 					matcolor	0.564,0.603,0.286,0.4
 				}
+			}
+		}
+		windowDef p_deckmenu
+		{
+			rect	0,0,640,480
+			visible	0
+			backcolor	0,0.498,0.498,1
+			windowDef p_deckIcon
+			{
+				rect	410,99,212,283
+				visible	1
+				forecolor	1,1,1,1
+				text	"wah wah wah wah wah wah wah"
+				textscale	1
 			}
 		}
 	}
@@ -26231,6 +26261,81 @@ windowDef Desktop
 					
 				}
 				
+			}
+
+		}
+	}
+	windowDef cardSmall
+	{
+		rect	18,22,60,75
+		visible	1
+		backcolor	0,0.494,1,0.8
+		forecolor	1,1,1,1
+		text	"gui::card_text_1"
+		textscale	0.2
+		font	"fonts/lowpixel"
+
+		onMouseEnter {
+			
+			set "backcolor_w" "1" ;
+		}
+
+		onMouseExit {
+			transition "backcolor_w" "1" "0.8" "300" ;
+		}
+
+		onAction {
+			consolecmd "updatecardstats"
+		}
+
+		windowDef cardName
+		{
+			rect	2,-1,57,17
+			visible	0
+			forecolor	1,1,1,1
+			text	"name"
+			textscale	0.2
+			font	"fonts/lowpixel"
+		}
+		windowDef cardAtk
+		{
+			rect	0,61,17,16
+			visible	0
+			forecolor	1,1,1,1
+			text	"A1"
+			textscale	0.2
+			font	"fonts/lowpixel"
+		}
+		windowDef cardHP
+		{
+			rect	27,60,57,16
+			visible	0
+			forecolor	1,1,1,1
+			text	"H3/3"
+			textscale	0.2
+			font	"fonts/lowpixel"
+		}
+	}
+	windowDef p_help
+	{
+		rect	195,13,421,453
+		visible	0
+		forecolor	1,1,1,1
+		text	"Wecome to Quake 4 CARD BATTLE!!\n\nIn this mod you can battle it out vs the AI, earn credits, and spent them in the shop to get new cards.\n\nClick BATTLE in the pause menu during a game to fight the AI.\nPlace orange BATTLERs to battle the opponent. Green BOOSTs give you an upper hand.\nWin 3 fights to win the game.\n\nPress SHOP on the pause menu to buy cards with your credits.\nPress DECK EDIT on the pause menu to edit your deck."
+		textscale	0.3
+		font	"fonts/lowpixel"
+		windowDef btn_helpok
+		{
+			rect	175,341,78,59
+			visible	1
+			backcolor	0,1,0.250,0.501
+			forecolor	1,1,1,1
+			text	"OK"
+			textscale	1
+
+			onAction {
+				set "p_help::visible" "0" ;
+				set "btn_help::visible" "1" ;
 			}
 
 		}

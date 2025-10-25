@@ -11,3 +11,13 @@ BattlerCard::BattlerCard() :
 	description("Hello Worldb?"){
 
 }
+
+BattlerCard::BattlerCard(idStr namex, idStr descriptionx, int atkx, int maxHPx, int tributesx) {
+	name = namex;
+	description = descriptionx;
+	atk = atkx;
+	maxHP = maxHPx;
+	hp = maxHPx;
+	tributes = tributesx;
+
+}

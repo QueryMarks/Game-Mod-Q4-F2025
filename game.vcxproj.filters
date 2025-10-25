@@ -525,6 +525,9 @@
     <ClCompile Include="BattlerCard.cpp">
       <Filter>Game\Card</Filter>
     </ClCompile>
+    <ClCompile Include="CardGameManager.cpp">
+      <Filter>Game\Card</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game\Actor.h">
@@ -843,6 +846,9 @@
       <Filter>Game\Card</Filter>
     </ClInclude>
     <ClInclude Include="BattlerCard.h">
+      <Filter>Game\Card</Filter>
+    </ClInclude>
+    <ClInclude Include="CardGameManager.h">
       <Filter>Game\Card</Filter>
     </ClInclude>
   </ItemGroup>
