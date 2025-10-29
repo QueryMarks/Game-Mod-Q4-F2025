@@ -30,8 +30,8 @@
 #include "NoGameTypeInfo.h"
 #endif
 
-#include "..\..\BattlerCard.h"
 #include "..\..\CardGameManager.h"
+//#include "..\..\Deck.h"
 /*
 ==================
 Cmd_GetFloatArg
@@ -3055,13 +3055,26 @@ void Cmd_UpdateCardStats(const idCmdArgs& args) {
 		common->Printf("Failed to get mainMenu\n");
 	}
 	else {
-		Card card = cardGameManager.cardPool[0];
+		Card card = cardGameManager.cardPool[cardGameManager.playerDeck.deckContents[0]];
 		common->Printf("%s \n\n\nA%d   %d/%d", card.name.c_str(), card.atk, card.hp, card.maxHP);
 		idStr cardString = card.name.c_str() + idStr("\n\n\n\nA") + idStr(card.atk) + idStr("  H") + idStr(card.hp) + idStr("/") + idStr(card.maxHP);
 		mainMenu->SetStateString("card_text_1", cardString.c_str());
 	}
 	
 	
+}
+
+void Cmd_TestPlayerDeck(const idCmdArgs& args) {
+	common->Printf("testing deck info\n");
+	int cardIndex = cardGameManager.playerDeck.deckContents[0];
+	Card card = cardGameManager.cardPool[cardIndex];
+	common->Printf("Card's name is %s\n", card.name.c_str());
+	cardGameManager.playerDeck.ShuffleDeck();
+	cardIndex = cardGameManager.playerDeck.deckContents[0];
+	card = cardGameManager.cardPool[cardIndex];
+	common->Printf("After a shuffle, top card of deck name is %s\n", card.name.c_str());
+	Cmd_UpdateCardStats(idCmdArgs());
+
 }
 //ETHELYN END
 
@@ -3279,8 +3292,9 @@ void idGameLocal::InitConsoleCommands( void ) {
 // ETHELYN START
 	
 	cmdSystem->AddCommand( "testCardGui",           Cmd_TestCardGui,            CMD_FL_GAME|CMD_FL_CHEAT,   "Displays card game GUI");
-	cmdSystem->AddCommand( "testCardStats",          Cmd_TestCardStats,          CMD_FL_GAME|CMD_FL_CHEAT, "Prints data about an example card");
+	cmdSystem->AddCommand( "testCardStats",         Cmd_TestCardStats,          CMD_FL_GAME|CMD_FL_CHEAT, "Prints data about an example card");
 	cmdSystem->AddCommand( "updateCardStats",       Cmd_UpdateCardStats,        CMD_FL_GAME|CMD_FL_CHEAT, "Updates card stats");
+	cmdSystem->AddCommand( "testPlayerDeck",        Cmd_TestPlayerDeck,         CMD_FL_GAME|CMD_FL_CHEAT, "Prints first card in player's deck");
 }
 //ETHELYN END
 

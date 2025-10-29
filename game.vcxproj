@@ -214,6 +214,7 @@
     <ClCompile Include="BattlerCard.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CardGameManager.cpp" />
+    <ClCompile Include="Deck.cpp" />
     <ClCompile Include="game\Actor.cpp" />
     <ClCompile Include="game\AF.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='DebugInline|Win32'">Create</PrecompiledHeader>
@@ -382,6 +383,7 @@
     <ClInclude Include="BattlerCard.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="CardGameManager.h" />
+    <ClInclude Include="Deck.h" />
     <ClInclude Include="game\Actor.h" />
     <ClInclude Include="game\AF.h" />
     <ClInclude Include="game\AFEntity.h" />
