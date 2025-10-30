@@ -11,6 +11,7 @@ Card::Card() {
 	description = "This is a blank card";
 	battler = true;
 	atk = 0;
+	tempAtk = 0;
 	maxHP = 0;
 	hp = maxHP;
 	tributes = 0;
@@ -22,6 +23,7 @@ Card::Card(idStr namex, idStr descriptionx, bool battlerx, int atkx, int maxHPx,
 	description = descriptionx;
 	battler = battlerx,
 	atk = atkx;
+	tempAtk = atkx;
 	maxHP = maxHPx;
 	hp = maxHPx;
 	tributes = tributesx;
@@ -30,5 +32,10 @@ Card::Card(idStr namex, idStr descriptionx, bool battlerx, int atkx, int maxHPx,
 
 void Card::Effect() {
 	return;
+}
+
+Card Card::CloneCard() {
+	Card clonedCard = Card(name, description, battler, atk, maxHP, tributes);
+	return clonedCard;
 }
 idStr description = "pizza pie";

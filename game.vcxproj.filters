@@ -522,13 +522,13 @@
     <ClCompile Include="Card.cpp">
       <Filter>Game\Card</Filter>
     </ClCompile>
-    <ClCompile Include="BattlerCard.cpp">
-      <Filter>Game\Card</Filter>
-    </ClCompile>
     <ClCompile Include="CardGameManager.cpp">
       <Filter>Game\Card</Filter>
     </ClCompile>
     <ClCompile Include="Deck.cpp">
+      <Filter>Game\Card</Filter>
+    </ClCompile>
+    <ClCompile Include="CardGameInstance.cpp">
       <Filter>Game\Card</Filter>
     </ClCompile>
   </ItemGroup>
@@ -848,13 +848,13 @@
     <ClInclude Include="Card.h">
       <Filter>Game\Card</Filter>
     </ClInclude>
-    <ClInclude Include="BattlerCard.h">
-      <Filter>Game\Card</Filter>
-    </ClInclude>
     <ClInclude Include="CardGameManager.h">
       <Filter>Game\Card</Filter>
     </ClInclude>
     <ClInclude Include="Deck.h">
+      <Filter>Game\Card</Filter>
+    </ClInclude>
+    <ClInclude Include="CardGameInstance.h">
       <Filter>Game\Card</Filter>
     </ClInclude>
   </ItemGroup>

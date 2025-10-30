@@ -31,6 +31,7 @@
 #endif
 
 #include "..\..\CardGameManager.h"
+#include "..\..\CardGameInstance.h"
 //#include "..\..\Deck.h"
 /*
 ==================
@@ -45,6 +46,7 @@ float Cmd_GetFloatArg( const idCmdArgs &args, int &argNum ) {
 }
 
 CardGameManager cardGameManager = CardGameManager();
+CardGameInstance cardGameInstance = CardGameInstance();
 
 /*
 ===================
@@ -3058,11 +3060,73 @@ void Cmd_UpdateCardStats(const idCmdArgs& args) {
 		Card card = cardGameManager.cardPool[cardGameManager.playerDeck.deckContents[0]];
 		common->Printf("%s \n\n\nA%d   %d/%d", card.name.c_str(), card.atk, card.hp, card.maxHP);
 		idStr cardString = card.name.c_str() + idStr("\n\n\n\nA") + idStr(card.atk) + idStr("  H") + idStr(card.hp) + idStr("/") + idStr(card.maxHP);
-		mainMenu->SetStateString("card_text_1", cardString.c_str());
+		mainMenu->SetStateString(args.Argv(1), cardString.c_str());
+		common->Printf("Here is the idCmdArgs%s", args.Argv(1));
 	}
 	
-	
 }
+
+void UpdateCardStats(Card card, int index) {
+	common->Printf("Made it into UpdateCardStats with index %d\n", index);
+	idUserInterface* mainMenu = uiManager->FindGui("guis/mainmenu.gui", true, false, true);
+	idStr myString = idStr("player_hand_text_") + idStr(index);
+	idStr cardString = card.name.c_str() + idStr("\n\n\n\nA") + idStr(card.atk) + idStr("  H") + idStr(card.hp) + idStr("/") + idStr(card.maxHP);
+	mainMenu->SetStateString(myString.c_str(), cardString.c_str());
+}
+
+void Cmd_StartCardGame(const idCmdArgs& args) {
+	cardGameInstance.playerDeck = &cardGameManager.playerDeck.CloneDeck();
+	cardGameInstance.StartGame();
+	for (int i = 0; i <= 4; i++) {
+		UpdateCardStats(cardGameManager.cardPool[cardGameInstance.playerHand[i]], i);
+		common->Printf("Added card numero %d\n", i);
+	}
+	
+
+}
+
+//Updates card examine to give the full description of the card.
+//0-4 are cards 0-4 in the player's hand. 5 and 6 are the player's battler and the opponent's battler. 7 and 8 are the player's boost and the opponent's boost.
+void UpdateCardExamine(Card card) {
+	common->Printf("Made it to UpdateCardExamine()\n");
+	idUserInterface* mainMenu = uiManager->FindGui("guis/mainmenu.gui", true, false, true);
+	mainMenu->SetStateString("card_examine_game_name", card.name);
+	mainMenu->SetStateString("card_examine_game_description", card.description);
+	if (card.battler) {
+		mainMenu->SetStateString("card_examine_game_atk", idStr("Atk: ") + idStr(card.atk));
+		mainMenu->SetStateString("card_examine_game_hp", idStr("HP: ") + idStr(card.hp) + "/" + idStr(card.maxHP));
+		mainMenu->SetStateBool("card_examine_game_boost", false);
+	}
+	else {
+		mainMenu->SetStateBool("card_examine_game_boost", true);
+	}
+	
+
+	/*Set color, scrapped because it didn'tn't work
+	idVec4 blueHighlight = idStr::ColorForIndex(C_COLOR_BLUE);
+	idVec4 redHighlight = idStr::ColorForIndex(C_COLOR_RED);
+	idVec4 yellowHighlight = idStr::ColorForIndex(C_COLOR_YELLOW);
+	blueHighlight[3] = 0.15f;
+	redHighlight[3] = 0.15f;
+	yellowHighlight[3] = 0.15f;
+
+	mainMenu->SetStateVec4("card_examine_game_backcolor", redHighlight);
+	common->Printf("backcolor is %s\n", mainMenu->GetStateVec4("card_examine_game_backcolor").ToString());
+	mainMenu->Redraw(1);*/
+}
+void Cmd_UpdateCardExamine(const idCmdArgs& args) {
+	idUserInterface* mainMenu = uiManager->FindGui("guis/mainmenu.gui", true, false, true);
+	int cardIndex = *args.Argv(1)  - '0';
+	common->Printf("The argument used is %s\n", args.Argv(1));
+	common->Printf("The integer is %d\n", cardIndex);
+	if (cardIndex <= 4) {
+		Card card = cardGameManager.cardPool[cardGameManager.playerDeck.deckContents[cardIndex]];
+		UpdateCardExamine(card);
+	}
+
+}
+
+
 
 void Cmd_TestPlayerDeck(const idCmdArgs& args) {
 	common->Printf("testing deck info\n");
@@ -3294,7 +3358,9 @@ void idGameLocal::InitConsoleCommands( void ) {
 	cmdSystem->AddCommand( "testCardGui",           Cmd_TestCardGui,            CMD_FL_GAME|CMD_FL_CHEAT,   "Displays card game GUI");
 	cmdSystem->AddCommand( "testCardStats",         Cmd_TestCardStats,          CMD_FL_GAME|CMD_FL_CHEAT, "Prints data about an example card");
 	cmdSystem->AddCommand( "updateCardStats",       Cmd_UpdateCardStats,        CMD_FL_GAME|CMD_FL_CHEAT, "Updates card stats");
+	cmdSystem->AddCommand( "updateCardExamine", Cmd_UpdateCardExamine,  CMD_FL_GAME|CMD_FL_CHEAT, "Updates card examine");
 	cmdSystem->AddCommand( "testPlayerDeck",        Cmd_TestPlayerDeck,         CMD_FL_GAME|CMD_FL_CHEAT, "Prints first card in player's deck");
+	cmdSystem->AddCommand( "startCardGame",         Cmd_StartCardGame,          CMD_FL_GAME|CMD_FL_CHEAT, "Starts the card game up");
 }
 //ETHELYN END
 

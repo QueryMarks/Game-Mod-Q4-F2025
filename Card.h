@@ -13,9 +13,11 @@ public:
 	int hp;
 	int maxHP;
 	int atk;
+	int tempAtk;
 	int tributes;
 
 	void Effect();
+	Card CloneCard();
 
 
 };

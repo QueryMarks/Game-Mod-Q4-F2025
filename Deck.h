@@ -16,6 +16,10 @@ public:
 
 	void ShuffleDeck();
 
+	Deck CloneDeck();
+
+	int Draw();
+
 };
 
 #endif

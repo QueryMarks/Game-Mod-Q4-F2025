@@ -8,7 +8,6 @@
 
 
 Deck::Deck() {
-	deckContents.Append(3);
 
 }
 
@@ -38,5 +37,19 @@ void Deck::ShuffleDeck() {
 		common->Printf("i is %d\n", i);
 	}
 
+}
+
+Deck Deck::CloneDeck() {
+	Deck newDeck = Deck();
+	for (int i = 0; i < deckContents.GetGranularity(); i++) {
+		newDeck.deckContents.Append(deckContents[i]);
+	}
+	return newDeck;
+}
+
+int Deck::Draw() {
+	int returnVal = deckContents[0];
+	deckContents.RemoveIndex(0);
+	return returnVal;
 }
 

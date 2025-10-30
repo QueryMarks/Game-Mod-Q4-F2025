@@ -211,8 +211,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="BattlerCard.cpp" />
     <ClCompile Include="Card.cpp" />
+    <ClCompile Include="CardGameInstance.cpp" />
     <ClCompile Include="CardGameManager.cpp" />
     <ClCompile Include="Deck.cpp" />
     <ClCompile Include="game\Actor.cpp" />
@@ -380,8 +380,8 @@
     <ClCompile Include="game\WorldSpawn.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BattlerCard.h" />
     <ClInclude Include="Card.h" />
+    <ClInclude Include="CardGameInstance.h" />
     <ClInclude Include="CardGameManager.h" />
     <ClInclude Include="Deck.h" />
     <ClInclude Include="game\Actor.h" />
