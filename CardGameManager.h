@@ -22,9 +22,14 @@ public:
 		SHEEP,
 		POWERCELL,
 		SHIELDPAK,
-		TELESWAP
+		TELESWAP,
+		ARMORBLAST,
+		FLAG,
+		FLAGBUSTER,
+		WEAKENER,
+		SHEEPHANDS
 	};
-	static Card cardPool[14];
+	static Card cardPool[19];
 	idStr testString;
 
 };

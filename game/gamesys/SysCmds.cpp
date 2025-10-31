@@ -3307,7 +3307,75 @@ void ResolveCardEffect(int effect, bool player) {
 		tempCard = cardGameInstance.playerBattler;
 		cardGameInstance.playerBattler = cardGameInstance.opponentBattler;
 		cardGameInstance.opponentBattler = tempCard;
+		break;
+	case exampleCard.SWAPHPATK:
+		if (player) {
+			tempCard = cardGameInstance.playerBattler;
+			cardGameInstance.playerBattler.tempAtk = cardGameInstance.playerBattler.hp;
+			cardGameInstance.playerBattler.hp = tempCard.tempAtk;
+			break;
+		}
+		else {
+			tempCard = cardGameInstance.opponentBattler;
+			cardGameInstance.opponentBattler.tempAtk = cardGameInstance.opponentBattler.hp;
+			cardGameInstance.opponentBattler.hp = tempCard.tempAtk;
+			break;
+		}
+	case exampleCard.GAINPOINT:
+		if (player) {
+			cardGameInstance.playerPoints += 1;
+			if (cardGameInstance.playerPoints >= 3)
+			{
+				//player wins
+				idUserInterface* mainMenu = uiManager->FindGui("guis/mainmenu.gui", true, false, true);
+				mainMenu->SetStateBool("card_game_over_visible", true);
+				mainMenu->SetStateString("card_game_over_text", idStr("You won! You received 150 points."));
+				cardGameManager.playerMoneys += 150;
+				mainMenu->SetStateString("card_player_moneys", idStr(cardGameManager.playerMoneys));
+				cardGameInstance.cardGameState = cardGameInstance.GAMEEND;
+			}
+			
 
+		}
+		else {
+			cardGameInstance.opponentPoints += 1;
+			if (cardGameInstance.opponentPoints >= 3) {
+				idUserInterface* mainMenu = uiManager->FindGui("guis/mainmenu.gui", true, false, true);
+				mainMenu->SetStateBool("card_game_over_visible", true);
+				mainMenu->SetStateString("card_game_over_text", idStr("You have been defeated."));
+				mainMenu->SetStateString("card_player_moneys", idStr(cardGameManager.playerMoneys));
+				cardGameInstance.cardGameState = cardGameInstance.GAMEEND;
+			}
+		}
+		break;
+	
+	case exampleCard.REMOVEOPPONENTPOINT:
+		if (player) {
+			cardGameInstance.opponentPoints -= 1;
+
+
+		}
+		else {
+			cardGameInstance.playerPoints -= 1;
+			
+		}
+		break;
+
+	case exampleCard.REMOVEATK1:
+		if (player) {
+			cardGameInstance.opponentBattler.tempAtk -= 1;
+		}
+		else {
+			cardGameInstance.playerBattler.tempAtk -= 1;
+		}
+		break;
+	case exampleCard.SHEEPHANDS:
+		cardGameInstance.playerHand.Clear();
+		cardGameInstance.opponentHand.Clear();
+		for (int i = 0; i < 5; i++) {
+			cardGameInstance.playerHand.Append(cardGameManager.SHEEP);
+			cardGameInstance.opponentHand.Append(cardGameManager.SHEEP);
+		}
 	default:
 		break;
 	}
@@ -3439,15 +3507,20 @@ void Cmd_PlayPlayerCard(const idCmdArgs& args) {
 				mainMenu->SetStateString("card_game_over_text", idStr("You won! You received 150 points."));
 				cardGameManager.playerMoneys += 150;
 				mainMenu->SetStateString("card_player_moneys", idStr(cardGameManager.playerMoneys));
+				cardGameInstance.cardGameState = cardGameInstance.GAMEEND;
 			}
 			else if (cardGameInstance.opponentPoints >= 3) {
 				idUserInterface* mainMenu = uiManager->FindGui("guis/mainmenu.gui", true, false, true);
 				mainMenu->SetStateBool("card_game_over_visible", true);
 				mainMenu->SetStateString("card_game_over_text", idStr("You have been defeated."));
 				mainMenu->SetStateString("card_player_moneys", idStr(cardGameManager.playerMoneys));
+				cardGameInstance.cardGameState = cardGameInstance.GAMEEND;
 			}
-			cardGameInstance.DrawForTurn();
-			cardGameInstance.cardGameState = cardGameInstance.PLAYBATTLER;
+			else {
+				cardGameInstance.DrawForTurn();
+				cardGameInstance.cardGameState = cardGameInstance.PLAYBATTLER;
+			}
+			
 		}
 		else {
 			common->Printf("NOT READY FOR NEXT");
