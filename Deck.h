@@ -18,6 +18,8 @@ public:
 
 	Deck CloneDeck();
 
+	idList<int>* CloneDeckContents();
+
 	int Draw();
 
 };

@@ -7,7 +7,8 @@
 #include "Card.h"
 #include "Deck.h"
 
-Card CardGameManager::cardPool[6] = {
+Card CardGameManager::cardPool[7] = {
+	Card("NOTAREALCARD", "NULL CARD DO NOT USE", false, 0, 0, 0),
 	Card("Healthpak", "This is a healthspak", false, 0, 0 ,0),
 	Card("Alien", "This is an aliens", true, 4, 2, 0),
 	Card("Marine", "It's the military perhaps", true, 3, 3, 0),
@@ -25,13 +26,13 @@ Deck CardGameManager::playerDeck = Deck();
 CardGameManager::CardGameManager() {
 	
 	testString = "pie";
-	idList<int> deckContents = idList<int>(6);
+	idList<int> deckContents = idList<int>();
 	deckContents.Append(HEALTHPAK);
 	deckContents.Append(ALIEN);
 	deckContents.Append(MARINE);
-	deckContents.Append(ROCK);
+	/*deckContents.Append(ROCK);
 	deckContents.Append(SWORDY);
-	deckContents.Append(BADCARD);
+	deckContents.Append(BADCARD);*/
 	playerDeck.deckContents = deckContents;
 };
 

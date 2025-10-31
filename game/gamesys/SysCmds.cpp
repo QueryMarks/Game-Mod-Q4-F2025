@@ -3070,18 +3070,75 @@ void UpdateCardStats(Card card, int index) {
 	common->Printf("Made it into UpdateCardStats with index %d\n", index);
 	idUserInterface* mainMenu = uiManager->FindGui("guis/mainmenu.gui", true, false, true);
 	idStr myString = idStr("player_hand_text_") + idStr(index);
-	idStr cardString = card.name.c_str() + idStr("\n\n\n\nA") + idStr(card.atk) + idStr("  H") + idStr(card.hp) + idStr("/") + idStr(card.maxHP);
+	idStr cardString;
+	if (card.battler) {
+		cardString = card.name.c_str() + idStr("\n\n\n\nA") + idStr(card.atk) + idStr("  H") + idStr(card.hp) + idStr("/") + idStr(card.maxHP);
+		mainMenu->SetStateBool(idStr("player_hand_boost_") + idStr(index), false);
+	}
+	else {
+		cardString = card.name.c_str();
+		mainMenu->SetStateBool(idStr("player_hand_boost_") + idStr(index),true);
+	}
 	mainMenu->SetStateString(myString.c_str(), cardString.c_str());
+	common->Printf(idStr("player_hand_visible_") + idStr(index));
+	mainMenu->SetStateBool(idStr("player_hand_visible_") + idStr(index), true);
 }
 
-void Cmd_StartCardGame(const idCmdArgs& args) {
-	cardGameInstance.playerDeck = &cardGameManager.playerDeck.CloneDeck();
-	cardGameInstance.StartGame();
-	for (int i = 0; i <= 4; i++) {
-		UpdateCardStats(cardGameManager.cardPool[cardGameInstance.playerHand[i]], i);
-		common->Printf("Added card numero %d\n", i);
+void DisplayHands() {
+	idUserInterface* mainMenu = uiManager->FindGui("guis/mainmenu.gui", true, false, true);
+	if (cardGameInstance.playerHand.Num() < 5) {
+		for (int i = 0; i < cardGameInstance.playerHand.Num(); i++) {
+			UpdateCardStats(cardGameManager.cardPool[cardGameInstance.playerHand[i]], i);
+			common->Printf("Added card numero %d\n", i);
+		}
+		for (int i = cardGameInstance.playerHand.Num(); i < 5; i++) {
+			mainMenu->SetStateBool(idStr("player_hand_visible_") + idStr(i), false);
+		}
+	}
+	else {
+		for (int i = 0; i < 5; i++) {
+			UpdateCardStats(cardGameManager.cardPool[cardGameInstance.playerHand[i]], i);
+		}
+	}
+
+	if (cardGameInstance.playerBattler.name != "Blank") {
+		UpdateCardStats(cardGameInstance.playerBattler, 5);
+	}
+
+	if (cardGameInstance.playerBoost.name != "Blank") {
+		UpdateCardStats(cardGameInstance.playerBoost, 6);
 	}
 	
+}
+void Cmd_StartCardGame(const idCmdArgs& args) {
+
+	cardGameInstance.playerDeck = cardGameManager.playerDeck;
+	if (true)
+	{ 
+		cardGameInstance.StartGame();
+		common->Printf("Handsize is %d\n", cardGameInstance.playerHand.Num());
+		DisplayHands();
+	}
+	else
+	{
+		common->Printf("cardGameInstance not working\n");
+	}
+	
+	
+
+}
+
+
+void Cmd_PlayPlayerCard(const idCmdArgs& args) {
+	int cardIndex = *args.Argv(1) - '0';
+	if ((cardGameInstance.cardGameState = cardGameInstance.PLAYBATTLER) && (cardGameManager.cardPool[cardGameInstance.playerHand[cardIndex]].battler = true)) {
+		cardGameInstance.PlayBattler(cardIndex, true);
+	}
+	else if ((cardGameInstance.cardGameState = cardGameInstance.PLAYBOOST) && (cardGameManager.cardPool[cardGameInstance.playerHand[cardIndex]].battler = false)) {
+		cardGameInstance.PlayBoost(cardIndex, true);
+	}
+
+	DisplayHands();
 
 }
 
@@ -3098,6 +3155,9 @@ void UpdateCardExamine(Card card) {
 		mainMenu->SetStateBool("card_examine_game_boost", false);
 	}
 	else {
+		mainMenu->SetStateString("card_examine_game_atk", idStr(""));
+		mainMenu->SetStateString("card_examine_game_hp", idStr(""));
+		mainMenu->SetStateBool("card_examine_game_boost", false);
 		mainMenu->SetStateBool("card_examine_game_boost", true);
 	}
 	
@@ -3120,7 +3180,7 @@ void Cmd_UpdateCardExamine(const idCmdArgs& args) {
 	common->Printf("The argument used is %s\n", args.Argv(1));
 	common->Printf("The integer is %d\n", cardIndex);
 	if (cardIndex <= 4) {
-		Card card = cardGameManager.cardPool[cardGameManager.playerDeck.deckContents[cardIndex]];
+		Card card = cardGameManager.cardPool[cardGameInstance.playerHand[cardIndex]];
 		UpdateCardExamine(card);
 	}
 

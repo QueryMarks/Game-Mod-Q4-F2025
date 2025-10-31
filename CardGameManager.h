@@ -8,6 +8,7 @@ public:
 	CardGameManager();
 	static Deck playerDeck;
 	enum CardPoolEnum {
+		NOTAREALCARD,
 		HEALTHPAK,
 		ALIEN,
 		MARINE,
@@ -15,7 +16,7 @@ public:
 		SWORDY,
 		BADCARD
 	};
-	static Card cardPool[6];
+	static Card cardPool[7];
 	idStr testString;
 
 };

@@ -18,18 +18,27 @@ class CardGameInstance {
 			FLIPBOOST,
 			BATTLE
 		};
-		Deck* playerDeck;
+		Deck playerDeck;
 		idUserInterface* mainMenu;
-		Deck* opponentDeck;
+		Deck opponentDeck;
 		//Uncomment below when opponent has been added
 		//Opponent opponent;
 
+		int cardGameState;
+
 		idList<int> playerHand;
 		idList<int> opponentHand;
-		Card* playerBattler;
-		Card* opponentBattler;
+		Card playerBattler;
+		Card playerBoost;
+		Card opponentBattler;
+		Card opponentBoost;
 
 		void StartGame();
+
+		void PlayBattler(int handIndex, bool playerCard);
+
+		void PlayBoost(int handIndex, bool playerBoost);
+
 		void EndGame();
 };
 #endif
