@@ -15,9 +15,10 @@ Card::Card() {
 	maxHP = 0;
 	hp = maxHP;
 	tributes = 0;
+	effect = NONE;
 
 }
-Card::Card(idStr namex, idStr descriptionx, bool battlerx, int atkx, int maxHPx, int tributesx) {
+Card::Card(idStr namex, idStr descriptionx, bool battlerx, int atkx, int maxHPx, int tributesx, int effectx) {
 	
 	name = namex;
 	description = descriptionx;
@@ -27,6 +28,7 @@ Card::Card(idStr namex, idStr descriptionx, bool battlerx, int atkx, int maxHPx,
 	maxHP = maxHPx;
 	hp = maxHPx;
 	tributes = tributesx;
+	effect = effectx;
 
 }
 
@@ -35,7 +37,18 @@ void Card::Effect() {
 }
 
 Card Card::CloneCard() {
-	Card clonedCard = Card(name, description, battler, atk, maxHP, tributes);
+	Card clonedCard = Card(name, description, battler, atk, maxHP, tributes, effect);
 	return clonedCard;
+}
+void Card::CopyCard(Card card) {
+	name = card.name;
+	description = card.description;
+	battler = card.battler;
+	atk = card.atk;
+	tempAtk = card.tempAtk;
+	hp = card.hp;
+	maxHP = card.maxHP;
+	tributes = card.tributes;
+	effect = card.effect;
 }
 idStr description = "pizza pie";

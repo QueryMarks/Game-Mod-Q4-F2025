@@ -16,11 +16,13 @@ class CardGameInstance {
 			FLIPBATTLER,
 			PLAYBOOST,
 			FLIPBOOST,
-			BATTLE
+			BATTLE,
+			GAMEEND
 		};
 		Deck playerDeck;
 		idUserInterface* mainMenu;
 		Deck opponentDeck;
+		Deck baseOpponentDeck;
 		//Uncomment below when opponent has been added
 		//Opponent opponent;
 
@@ -33,11 +35,16 @@ class CardGameInstance {
 		Card opponentBattler;
 		Card opponentBoost;
 
+		int playerPoints;
+		int opponentPoints;
+
 		void StartGame();
 
-		void PlayBattler(int handIndex, bool playerCard);
+		void DrawForTurn();
 
-		void PlayBoost(int handIndex, bool playerBoost);
+		int PlayBattler(int handIndex, bool playerCard);
+
+		int PlayBoost(int handIndex, bool playerBoost);
 
 		void EndGame();
 };

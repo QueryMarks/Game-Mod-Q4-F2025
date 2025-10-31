@@ -7,6 +7,7 @@ public:
 
 	CardGameManager();
 	static Deck playerDeck;
+	int playerMoneys;
 	enum CardPoolEnum {
 		NOTAREALCARD,
 		HEALTHPAK,
@@ -14,9 +15,16 @@ public:
 		MARINE,
 		ROCK,
 		SWORDY,
-		BADCARD
+		BADCARD,
+		BONUSPAK,
+		DRAWPARTY,
+		BLOODBAATH,
+		SHEEP,
+		POWERCELL,
+		SHIELDPAK,
+		TELESWAP
 	};
-	static Card cardPool[7];
+	static Card cardPool[14];
 	idStr testString;
 
 };

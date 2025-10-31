@@ -3093,7 +3093,7 @@ void UpdateCardStats(Card card, int index) {
 		}
 		else {
 
-			cardString = card.name.c_str() + idStr("\n\n\n\nA") + idStr(card.atk) + idStr("  H") + idStr(card.hp) + idStr("/") + idStr(card.maxHP);
+			cardString = card.name.c_str() + idStr("\n\n\n\nA") + idStr(card.tempAtk) + idStr("  H") + idStr(card.hp) + idStr("/") + idStr(card.maxHP);
 			mainMenu->SetStateString(myString.c_str(), cardString.c_str());
 			mainMenu->SetStateBool(idStr("player_battler_visible"), true);
 		}
@@ -3110,9 +3110,39 @@ void UpdateCardStats(Card card, int index) {
 
 			cardString = card.name.c_str();
 			mainMenu->SetStateString(myString.c_str(), cardString.c_str());
-			mainMenu->SetStateBool(idStr("player_battler_visible"), true);
+			mainMenu->SetStateBool(idStr("player_boost_visible"), true);
 		}
 		
+	}
+	//display opponent battler
+	else if (index == 7) {
+		idStr myString = idStr("opponent_battler_text");
+		idStr cardString;
+		if (card.name == "Blank") {
+			mainMenu->SetStateBool(idStr("opponent_battler_visible"), false);
+
+		}
+		else {
+
+			cardString = card.name.c_str() + idStr("\n\n\n\nA") + idStr(card.tempAtk) + idStr("  H") + idStr(card.hp) + idStr("/") + idStr(card.maxHP);
+			mainMenu->SetStateString(myString.c_str(), cardString.c_str());
+			mainMenu->SetStateBool(idStr("opponent_battler_visible"), true);
+		}
+	}
+	else if (index == 8) {
+		idStr myString = idStr("opponent_boost_text");
+		idStr cardString;
+		if (card.name == "Blank") {
+			mainMenu->SetStateBool(idStr("opponent_boost_visible"), false);
+
+		}
+		else {
+
+			cardString = card.name.c_str();
+			mainMenu->SetStateString(myString.c_str(), cardString.c_str());
+			mainMenu->SetStateBool(idStr("opponent_boost_visible"), true);
+		}
+
 	}
 }
 
@@ -3132,19 +3162,61 @@ void DisplayHands() {
 			UpdateCardStats(cardGameManager.cardPool[cardGameInstance.playerHand[i]], i);
 		}
 	}
+	//make opponent's hand elements visible
+	if (cardGameInstance.opponentHand.Num() < 5) {
+		for (int i = 0; i < cardGameInstance.opponentHand.Num(); i++) {
+			mainMenu->SetStateBool(idStr("opponent_hand_visible_") + idStr(i), true);
+		}
+		for (int i = cardGameInstance.opponentHand.Num(); i < 5; i++) {
+			mainMenu->SetStateBool(idStr("opponent_hand_visible_") + idStr(i), false);
+		}
+	}
+	else {
+		for (int i = 0; i < 5; i++) {
+			mainMenu->SetStateBool(idStr("opponent_hand_visible_") + idStr(i), true);
+		}
+	}
 
-	if (cardGameInstance.playerBattler.name != "Blank") {
+	//if (cardGameInstance.playerBattler.name != "Blank") {
 		common->Printf("Displaying player battler\n");
 		UpdateCardStats(cardGameInstance.playerBattler, 5);
-	}
+	//}
 
-	if (cardGameInstance.playerBoost.name != "Blank") {
+	//if (cardGameInstance.opponentBattler.name != "Blank") {
+		UpdateCardStats(cardGameInstance.opponentBattler, 7);
+	//}
+
+	//if (cardGameInstance.playerBoost.name != "Blank") {
 		UpdateCardStats(cardGameInstance.playerBoost, 6);
+	//}
+		UpdateCardStats(cardGameInstance.opponentBoost, 8);
+
+	mainMenu->SetStateString(idStr("player_points_text"), idStr(cardGameInstance.playerPoints));
+	mainMenu->SetStateString(idStr("opponent_points_text"), idStr(cardGameInstance.opponentPoints));
+	idStr currentStep;
+	switch (cardGameInstance.cardGameState) {
+	case cardGameInstance.DRAW:
+		currentStep = "DRAW";
+		break;
+	case cardGameInstance.PLAYBATTLER:
+		currentStep = "BATTLER";
+		break;
+	case cardGameInstance.PLAYBOOST:
+		currentStep = "BOOST";
+		break;
+	case cardGameInstance.FLIPBOOST:
+		currentStep = "HIT\nNEXT";
+		break;
+	case cardGameInstance.BATTLE:
+		currentStep = "HIT\nNEXT";
+		break;
 	}
+	mainMenu->SetStateString(idStr("current_step_text"), currentStep);
 	
 }
 void Cmd_StartCardGame(const idCmdArgs& args) {
-
+	idUserInterface* mainMenu = uiManager->FindGui("guis/mainmenu.gui", true, false, true);
+	mainMenu->SetStateBool(idStr("card_game_over_visible"), false);
 	cardGameInstance.playerDeck = cardGameManager.playerDeck;
 	if (true)
 	{ 
@@ -3161,20 +3233,227 @@ void Cmd_StartCardGame(const idCmdArgs& args) {
 
 }
 
+int PlayOpponentBattlerOrBoost(bool battler) {
+	int handIndex;
+	bool foundBattler = false;
+	for (int i = 0; i < cardGameInstance.opponentHand.Num(); i++) {
+		if (cardGameManager.cardPool[cardGameInstance.opponentHand[i]].battler == battler) {
+			handIndex = i;
+			return handIndex;
+		}
+	}
+	if (foundBattler == false) {
+		//return -1 to indicate that no card in hand was found
+		return -1;
+	}
+}
 
+void ResolveCardEffect(int effect, bool player) {
+	Card exampleCard = Card();
+	Card tempCard;
+	switch (effect) {
+
+	case exampleCard.DRAW1:
+
+		common->Printf("\n\nDrawing 1\n\n");
+		if (player) {
+			if ((cardGameInstance.playerDeck.deckContents.Num() >= 1) && (cardGameInstance.playerHand.Num() <= 4)) {
+				common->Printf("Draw method called");
+				cardGameInstance.playerHand.Append(cardGameInstance.playerDeck.Draw());
+			}
+		}
+		else {
+			if ((cardGameInstance.opponentDeck.deckContents.Num() >= 1) && (cardGameInstance.opponentHand.Num() <= 4)) {
+				cardGameInstance.opponentHand.Append(cardGameInstance.opponentDeck.Draw());
+			}
+		}
+		break;
+
+	case exampleCard.BOTHDRAW2:
+		for (int i = 0; i < 2; i++) {
+			if ((cardGameInstance.playerDeck.deckContents.Num() >= 1) && (cardGameInstance.playerHand.Num() <= 4)) {
+				cardGameInstance.playerHand.Append(cardGameInstance.playerDeck.Draw());
+			}
+			if ((cardGameInstance.opponentDeck.deckContents.Num() >= 1) && (cardGameInstance.opponentHand.Num() <= 4)) {
+				cardGameInstance.opponentHand.Append(cardGameInstance.opponentDeck.Draw());
+			}
+		}
+		break;
+
+	case exampleCard.BLOODBAATH:
+		cardGameInstance.playerBattler = cardGameManager.cardPool[cardGameManager.SHEEP];
+		cardGameInstance.opponentBattler = cardGameManager.cardPool[cardGameManager.SHEEP];
+		break;
+
+	case exampleCard.ATK1:
+		if (player) {
+			cardGameInstance.playerBattler.tempAtk += 1;
+		}
+		else {
+			cardGameInstance.opponentBattler.tempAtk += 1;
+		}
+		break;
+
+	case exampleCard.HP2:
+		if (player) {
+			cardGameInstance.playerBattler.hp += 2;
+		}
+		else {
+			cardGameInstance.opponentBattler.hp += 2;
+		}
+		break;
+
+	case exampleCard.SWAPCARDS:
+		tempCard = cardGameInstance.playerBattler;
+		cardGameInstance.playerBattler = cardGameInstance.opponentBattler;
+		cardGameInstance.opponentBattler = tempCard;
+
+	default:
+		break;
+	}
+
+}
+
+//Play the player's battler or boost and play the opponent's battler or boost to match
+//This should really be split up into multiple methods. Oops
 void Cmd_PlayPlayerCard(const idCmdArgs& args) {
 	common->Printf("in playplayercard\n");
 	int cardIndex = *args.Argv(1) - '0';
-	if ((cardGameInstance.cardGameState = cardGameInstance.PLAYBATTLER) && (cardGameManager.cardPool[cardGameInstance.playerHand[cardIndex]].battler = true)) {
-		common->Printf("calling playBattler");
-		//cardGameInstance.PlayBattler(cardIndex, true);
-		cardGameInstance.playerBattler = cardGameManager.cardPool[cardGameInstance.playerHand[cardIndex]].CloneCard();
-		cardGameInstance.playerHand.RemoveIndex(cardIndex);
-	}
-	else if ((cardGameInstance.cardGameState = cardGameInstance.PLAYBOOST) && (cardGameManager.cardPool[cardGameInstance.playerHand[cardIndex]].battler = false)) {
-		cardGameInstance.PlayBoost(cardIndex, true);
-	}
+	if (cardIndex >= 0)
+	{
+		if ((cardGameInstance.cardGameState == cardGameInstance.PLAYBATTLER) && (cardGameManager.cardPool[cardGameInstance.playerHand[cardIndex]].battler == true) && (cardGameInstance.playerBattler.name == "Blank")) {
+			//cardGameInstance.PlayBattler(cardIndex, true);
+			cardGameInstance.playerBattler.CopyCard(cardGameManager.cardPool[cardGameInstance.playerHand[cardIndex]]);
+			cardGameInstance.playerHand.RemoveIndex(cardIndex);
+			//Play opponent's hand here
+			int opponentCardIndex = PlayOpponentBattlerOrBoost(true);
+			common->Printf("Checked opponent's hand. Battler exists at %d\n", opponentCardIndex);
+			common->Printf("Opponent's hand has %d cards in it\n", cardGameInstance.opponentHand.Num());
+			if (opponentCardIndex != -1) {
+				//Opponent battler found in their hand
+				if (cardGameInstance.opponentBattler.name == "Blank") {
+					cardGameInstance.opponentBattler = cardGameManager.cardPool[cardGameInstance.opponentHand[opponentCardIndex]].CloneCard();
+					cardGameInstance.opponentHand.RemoveIndex(opponentCardIndex);
+				}
+			}
+			common->Printf("Opponent's battler is %s\n", cardGameInstance.opponentBattler.name.c_str());
 
+
+			cardGameInstance.cardGameState = cardGameInstance.FLIPBATTLER;
+			
+			//Reveal both battlers
+			cardGameInstance.cardGameState = cardGameInstance.PLAYBOOST;
+		}
+		else if ((cardGameInstance.cardGameState == cardGameInstance.PLAYBOOST) && (cardGameManager.cardPool[cardGameInstance.playerHand[cardIndex]].battler == false)) {
+			cardGameInstance.playerBoost = cardGameManager.cardPool[cardGameInstance.playerHand[cardIndex]].CloneCard();
+			cardGameInstance.playerHand.RemoveIndex(cardIndex);
+			//Play opponent's hand here
+			int opponentCardIndex = PlayOpponentBattlerOrBoost(false);
+			common->Printf("Checked opponent's hand. Boost exists at %d\n", opponentCardIndex);
+			common->Printf("Opponent's hand has %d cards in it\n", cardGameInstance.opponentHand.Num());
+			if (opponentCardIndex != -1) {
+				//Opponent battler found in their hand
+				cardGameInstance.opponentBoost = cardGameManager.cardPool[cardGameInstance.opponentHand[opponentCardIndex]].CloneCard();
+				cardGameInstance.opponentHand.RemoveIndex(opponentCardIndex);
+			}
+			common->Printf("Opponent's boost is %s\n", cardGameInstance.opponentBoost.name.c_str());
+
+
+			cardGameInstance.cardGameState = cardGameInstance.FLIPBOOST;
+			//Resolve both boosts
+			ResolveCardEffect(cardGameInstance.playerBoost.effect, true);
+			ResolveCardEffect(cardGameInstance.opponentBoost.effect, false);
+			//battle logic here
+		}
+	}
+	else {
+		//Skip playing a card
+		common->Printf("Next pressed");
+		if (cardGameInstance.cardGameState == cardGameInstance.PLAYBATTLER) {
+			int opponentCardIndex = PlayOpponentBattlerOrBoost(true);
+			common->Printf("Checked opponent's hand. Battler exists at %d\n", opponentCardIndex);
+			common->Printf("Opponent's hand has %d cards in it\n", cardGameInstance.opponentHand.Num());
+			if (opponentCardIndex != -1) {
+				//Opponent battler found in their hand
+				if (cardGameInstance.opponentBattler.name == "Blank") {
+					cardGameInstance.opponentBattler = cardGameManager.cardPool[cardGameInstance.opponentHand[opponentCardIndex]].CloneCard();
+					cardGameInstance.opponentHand.RemoveIndex(opponentCardIndex);
+				}
+			}
+			common->Printf("Opponent's battler is %s\n", cardGameInstance.opponentBattler.name.c_str());
+
+
+			cardGameInstance.cardGameState = cardGameInstance.FLIPBATTLER;
+			cardGameInstance.cardGameState = cardGameInstance.PLAYBOOST;
+			//Reveal both battlers
+		}
+		else if (cardGameInstance.cardGameState == cardGameInstance.PLAYBOOST) {
+			int opponentCardIndex = PlayOpponentBattlerOrBoost(false);
+			common->Printf("Checked opponent's hand. Boost exists at %d\n", opponentCardIndex);
+			common->Printf("Opponent's hand has %d cards in it\n", cardGameInstance.opponentHand.Num());
+			if (opponentCardIndex != -1) {
+				//Opponent battler found in their hand
+				cardGameInstance.opponentBoost = cardGameManager.cardPool[cardGameInstance.opponentHand[opponentCardIndex]].CloneCard();
+				cardGameInstance.opponentHand.RemoveIndex(opponentCardIndex);
+			}
+			common->Printf("Opponent's boost is %s\n", cardGameInstance.opponentBoost.name.c_str());
+
+
+			cardGameInstance.cardGameState = cardGameInstance.FLIPBOOST;
+			//Reveal both boosts
+			ResolveCardEffect(cardGameInstance.playerBoost.effect, true);
+			ResolveCardEffect(cardGameInstance.opponentBoost.effect, false);
+		}
+		else if (cardGameInstance.cardGameState == cardGameInstance.FLIPBOOST) {
+			cardGameInstance.cardGameState = cardGameInstance.BATTLE;
+			//battle logic here
+			cardGameInstance.playerBattler.hp -= cardGameInstance.opponentBattler.tempAtk;
+			cardGameInstance.opponentBattler.hp -= cardGameInstance.playerBattler.tempAtk;
+		}
+		else if (cardGameInstance.cardGameState == cardGameInstance.BATTLE) {
+			common->Printf("WE ARE IN BATTLE!!!!");
+
+			cardGameInstance.cardGameState = cardGameInstance.DRAW;
+			cardGameInstance.playerBoost = Card();
+			cardGameInstance.opponentBoost = Card();
+			if (cardGameInstance.playerBattler.hp <= 0) {
+				cardGameInstance.playerBattler = Card();
+			}
+			if (cardGameInstance.opponentBattler.hp <= 0) {
+				cardGameInstance.opponentBattler = Card();
+			}
+			if ((cardGameInstance.playerBattler.name != "Blank") && (cardGameInstance.opponentBattler.name == "Blank")) {
+				//award player 1 point
+				cardGameInstance.playerPoints += 1;
+			}
+			else if ((cardGameInstance.playerBattler.name == "Blank") && (cardGameInstance.opponentBattler.name != "Blank"))
+			{
+				cardGameInstance.opponentPoints += 1;
+			}
+
+			if (cardGameInstance.playerPoints >= 3)
+			{
+				//player wins
+				idUserInterface* mainMenu = uiManager->FindGui("guis/mainmenu.gui", true, false, true);
+				mainMenu->SetStateBool("card_game_over_visible", true);
+				mainMenu->SetStateString("card_game_over_text", idStr("You won! You received 150 points."));
+				cardGameManager.playerMoneys += 150;
+				mainMenu->SetStateString("card_player_moneys", idStr(cardGameManager.playerMoneys));
+			}
+			else if (cardGameInstance.opponentPoints >= 3) {
+				idUserInterface* mainMenu = uiManager->FindGui("guis/mainmenu.gui", true, false, true);
+				mainMenu->SetStateBool("card_game_over_visible", true);
+				mainMenu->SetStateString("card_game_over_text", idStr("You have been defeated."));
+				mainMenu->SetStateString("card_player_moneys", idStr(cardGameManager.playerMoneys));
+			}
+			cardGameInstance.DrawForTurn();
+			cardGameInstance.cardGameState = cardGameInstance.PLAYBATTLER;
+		}
+		else {
+			common->Printf("NOT READY FOR NEXT");
+		}
+	}
+	
 	DisplayHands();
 
 }
@@ -3187,7 +3466,7 @@ void UpdateCardExamine(Card card) {
 	mainMenu->SetStateString("card_examine_game_name", card.name);
 	mainMenu->SetStateString("card_examine_game_description", card.description);
 	if (card.battler) {
-		mainMenu->SetStateString("card_examine_game_atk", idStr("Atk: ") + idStr(card.atk));
+		mainMenu->SetStateString("card_examine_game_atk", idStr("Atk: ") + idStr(card.tempAtk));
 		mainMenu->SetStateString("card_examine_game_hp", idStr("HP: ") + idStr(card.hp) + "/" + idStr(card.maxHP));
 		mainMenu->SetStateBool("card_examine_game_boost", false);
 	}
@@ -3222,6 +3501,15 @@ void Cmd_UpdateCardExamine(const idCmdArgs& args) {
 	}
 	else if (cardIndex == 5) {
 		UpdateCardExamine(cardGameInstance.playerBattler);
+	}
+	else if (cardIndex == 6) {
+		UpdateCardExamine(cardGameInstance.playerBoost);
+	}
+	else if (cardIndex == 7) {
+		UpdateCardExamine(cardGameInstance.opponentBattler);
+	}
+	else if (cardIndex == 8) {
+		UpdateCardExamine(cardGameInstance.opponentBoost);
 	}
 
 }
@@ -3462,6 +3750,10 @@ void idGameLocal::InitConsoleCommands( void ) {
 	cmdSystem->AddCommand( "testPlayerDeck",        Cmd_TestPlayerDeck,         CMD_FL_GAME|CMD_FL_CHEAT, "Prints first card in player's deck");
 	cmdSystem->AddCommand( "startCardGame",         Cmd_StartCardGame,          CMD_FL_GAME|CMD_FL_CHEAT, "Starts the card game up");
 	cmdSystem->AddCommand( "playPlayerCard",        Cmd_PlayPlayerCard,         CMD_FL_GAME|CMD_FL_CHEAT, "Plays a card from the player's hand");
+
+	//Hope this goes off once menu is loaded
+	idUserInterface* mainMenu = uiManager->FindGui("guis/mainmenu.gui", true, false, true);
+	mainMenu->SetStateString("card_player_moneys", idStr(cardGameManager.playerMoneys));
 }
 //ETHELYN END
 

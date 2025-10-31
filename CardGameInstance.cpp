@@ -13,8 +13,11 @@ CardGameInstance::CardGameInstance() {
 	playerDeck = Deck();
 	mainMenu = NULL;
 	opponentDeck = Deck();
-	for (int i = 1; i < 20; i++) {
-		opponentDeck.deckContents.Append(3);
+	for (int i = 0; i < 15; i++) {
+		opponentDeck.deckContents.Append(6);
+	}
+	for (int i = 0; i < 5; i++) {
+		opponentDeck.deckContents.Append(1);
 	}
 	//Uncomment below when opponent has been added
 	//Opponent opponent;
@@ -26,26 +29,49 @@ CardGameInstance::CardGameInstance() {
 	opponentBattler = Card();
 	opponentBoost = Card();
 	cardGameState = DRAW;
+	playerPoints = 0;
+	opponentPoints = 0;
 }
 
 CardGameInstance::CardGameInstance(Deck playerDeckGiven, idUserInterface* mainMenuGiven) {
 	playerDeck = playerDeckGiven.CloneDeck();
 	mainMenu = mainMenuGiven;
 	opponentDeck = Deck();
-	for (int i = 1; i < 20; i++) {
-		opponentDeck.deckContents.Append(3);
+	for (int i = 0; i < 15; i++) {
+		opponentDeck.deckContents.Append(6);
+	}
+	for (int i = 0; i < 5; i++) {
+		opponentDeck.deckContents.Append(1);
 	}
 	playerBattler = Card();
 	playerBoost = Card();
 	opponentBattler = Card();
 	opponentBoost = Card();
 	cardGameState = DRAW;
+	playerPoints = 0;
+	opponentPoints = 0;
 }
 
 void CardGameInstance::StartGame() {
 
+	playerPoints = 0;
+	opponentPoints = 0;
 	playerHand.Clear();
 	opponentHand.Clear();
+	for (int i = 0; i < opponentDeck.deckContents.Num(); i++) {
+		opponentDeck.deckContents.RemoveIndex(i);
+	}
+	for (int i = 0; i < 15; i++) {
+		opponentDeck.deckContents.Append(6);
+	}
+	for (int i = 0; i < 5; i++) {
+		opponentDeck.deckContents.Append(1);
+	}
+	playerBattler = Card();
+	opponentBattler = Card();
+	playerBoost = Card();
+	opponentBoost = Card();
+
 	playerDeck.ShuffleDeck();
 	opponentDeck.ShuffleDeck();
 	cardGameState = DRAW;
@@ -93,4 +119,26 @@ void CardGameInstance::StartGame() {
 
 
 	cardGameState = PLAYBATTLER;
+}
+
+void CardGameInstance::DrawForTurn() {
+	common->Printf("Deck size: %d\n", playerDeck.deckContents.Num());
+	if (playerDeck.deckContents.Num() >= 1) {
+		int drawnCard = playerDeck.Draw();
+		//common->Printf("Drew card %d\n", drawnCard);
+		playerHand.Append(drawnCard);
+	}
+	if (opponentDeck.deckContents.Num() >= 1) {
+		int drawnCard = opponentDeck.Draw();
+		//common->Printf("Drew card %d\n", drawnCard);
+		opponentHand.Append(drawnCard);
+	}
+}
+
+//Return opponent's hand index that contains battler
+int CardGameInstance::PlayBattler(int handIndex, bool player) {
+	return -1;
+}
+int CardGameInstance::PlayBoost(int handIndex, bool player) {
+	return -1;
 }

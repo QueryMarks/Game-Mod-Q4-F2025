@@ -7,16 +7,28 @@
       "RelativeMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|solutionrelative:game\\gamesys\\SysCmds.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\CardGameManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|solutionrelative:CardGameManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\CardGameManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|solutionrelative:CardGameManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\Card.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|solutionrelative:Card.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\Card.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|solutionrelative:Card.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\CardGameInstance.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|solutionrelative:CardGameInstance.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\CardGameInstance.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|solutionrelative:CardGameInstance.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\CardGameManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|solutionrelative:CardGameManager.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|C:\\USERS\\ETHELYN\\DOCUMENTS\\GAME-MOD-Q4-F2025\\IDLIB\\CONTAINERS\\LISTGAME.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|solutionrelative:IDLIB\\CONTAINERS\\LISTGAME.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\game\\gamesys\\SysCmds.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -31,36 +43,24 @@
       "RelativeMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|solutionrelative:Deck.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\IDLIB\\CONTAINERS\\LIST.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|solutionrelative:IDLIB\\CONTAINERS\\LIST.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\Card.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|solutionrelative:Card.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\CardGameManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|solutionrelative:CardGameManager.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\CardGameInstance.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|solutionrelative:CardGameInstance.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\game\\MultiplayerGame.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|solutionrelative:game\\MultiplayerGame.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\RENDERER\\RENDERWORLD.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|solutionrelative:RENDERER\\RENDERWORLD.H||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\game\\gamesys\\State.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|solutionrelative:game\\gamesys\\State.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\game\\MultiplayerGame.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|solutionrelative:game\\MultiplayerGame.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57400}|idlib.vcxproj|C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\idlib\\Str.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57400}|idlib.vcxproj|solutionrelative:idlib\\Str.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\Card.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|solutionrelative:Card.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\game\\MultiplayerGame.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{49BEC5C6-B964-417A-851E-808886B57430}|game.vcxproj|solutionrelative:game\\MultiplayerGame.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -70,30 +70,43 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "CardGameInstance.h",
-              "DocumentMoniker": "C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\CardGameInstance.h",
-              "RelativeDocumentMoniker": "CardGameInstance.h",
-              "ToolTip": "C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\CardGameInstance.h",
-              "RelativeToolTip": "CardGameInstance.h",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAAACcAAAAMAAAAAAAAAA==",
+              "DocumentIndex": 6,
+              "Title": "ListGame.h",
+              "DocumentMoniker": "C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\idlib\\containers\\ListGame.h",
+              "RelativeDocumentMoniker": "idlib\\containers\\ListGame.h",
+              "ToolTip": "C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\idlib\\containers\\ListGame.h",
+              "RelativeToolTip": "idlib\\containers\\ListGame.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-10-29T16:14:05.019Z",
+              "WhenOpened": "2025-10-31T17:55:35.591Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 13,
+              "Title": "Str.cpp",
+              "DocumentMoniker": "C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\idlib\\Str.cpp",
+              "RelativeDocumentMoniker": "idlib\\Str.cpp",
+              "ToolTip": "C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\idlib\\Str.cpp",
+              "RelativeToolTip": "idlib\\Str.cpp",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAN8AAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-10-31T16:23:04.187Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "CardGameInstance.cpp",
               "DocumentMoniker": "C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\CardGameInstance.cpp",
               "RelativeDocumentMoniker": "CardGameInstance.cpp",
               "ToolTip": "C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\CardGameInstance.cpp",
               "RelativeToolTip": "CardGameInstance.cpp",
-              "ViewState": "AgIAAFEAAAAAAAAAAAAAAF8AAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAGwAAAAAAAAAAAAQwD4AAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-10-29T16:13:56.481Z",
               "EditorCaption": ""
@@ -106,14 +119,14 @@
               "RelativeDocumentMoniker": "game\\gamesys\\SysCmds.cpp",
               "ToolTip": "C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\game\\gamesys\\SysCmds.cpp",
               "RelativeToolTip": "game\\gamesys\\SysCmds.cpp",
-              "ViewState": "AgIAAA8MAAAAAAAAAAAgwCYMAAAhAAAAAAAAAA==",
+              "ViewState": "AgIAANkMAAAAAAAAAAApwLQMAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-10-28T23:30:55.488Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "MultiplayerGame.cpp",
               "DocumentMoniker": "C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\game\\MultiplayerGame.cpp",
               "RelativeDocumentMoniker": "game\\MultiplayerGame.cpp",
@@ -121,31 +134,21 @@
               "RelativeToolTip": "game\\MultiplayerGame.cpp",
               "ViewState": "AgIAAGYFAAAAAAAAAADgv3QFAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-10-30T19:20:54.652Z"
+              "WhenOpened": "2025-10-30T19:20:54.652Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Deck.cpp",
-              "DocumentMoniker": "C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\Deck.cpp",
-              "RelativeDocumentMoniker": "Deck.cpp",
-              "ToolTip": "C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\Deck.cpp",
-              "RelativeToolTip": "Deck.cpp",
-              "ViewState": "AgIAADMAAAAAAAAAAAAAAEIAAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-10-28T23:48:43.985Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "Deck.h",
               "DocumentMoniker": "C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\Deck.h",
               "RelativeDocumentMoniker": "Deck.h",
               "ToolTip": "C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\Deck.h",
               "RelativeToolTip": "Deck.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-10-28T23:48:35.078Z"
+              "WhenOpened": "2025-10-28T23:48:35.078Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -157,48 +160,90 @@
               "RelativeToolTip": "game\\gamesys\\State.cpp",
               "ViewState": "AgIAAHEAAAAAAAAAAADgv4sAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-10-30T18:32:41.699Z"
+              "WhenOpened": "2025-10-30T18:32:41.699Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "CardGameManager.cpp",
               "DocumentMoniker": "C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\CardGameManager.cpp",
               "RelativeDocumentMoniker": "CardGameManager.cpp",
               "ToolTip": "C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\CardGameManager.cpp",
               "RelativeToolTip": "CardGameManager.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAASAAAAAAAAAA==",
+              "ViewState": "AgIAABgAAAAAAAAAAAAAACwAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-10-29T00:11:51.05Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 2,
               "Title": "CardGameManager.h",
               "DocumentMoniker": "C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\CardGameManager.h",
               "RelativeDocumentMoniker": "CardGameManager.h",
               "ToolTip": "C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\CardGameManager.h",
               "RelativeToolTip": "CardGameManager.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAXAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-10-29T00:11:52.164Z"
+              "WhenOpened": "2025-10-29T00:11:52.164Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "List.h",
-              "DocumentMoniker": "C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\idlib\\containers\\List.h",
-              "RelativeDocumentMoniker": "idlib\\containers\\List.h",
-              "ToolTip": "C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\idlib\\containers\\List.h",
-              "RelativeToolTip": "idlib\\containers\\List.h",
-              "ViewState": "AgIAAAABAAAAAAAAAAD4vxsBAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-10-29T00:14:52.266Z"
+              "DocumentIndex": 3,
+              "Title": "Card.cpp",
+              "DocumentMoniker": "C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\Card.cpp",
+              "RelativeDocumentMoniker": "Card.cpp",
+              "ToolTip": "C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\Card.cpp",
+              "RelativeToolTip": "Card.cpp",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAADMAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-10-28T23:26:22.84Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 4,
+              "Title": "Card.h",
+              "DocumentMoniker": "C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\Card.h",
+              "RelativeDocumentMoniker": "Card.h",
+              "ToolTip": "C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\Card.h",
+              "RelativeToolTip": "Card.h",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABEAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-10-28T23:26:22.284Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Deck.cpp",
+              "DocumentMoniker": "C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\Deck.cpp",
+              "RelativeDocumentMoniker": "Deck.cpp",
+              "ToolTip": "C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\Deck.cpp",
+              "RelativeToolTip": "Deck.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-10-28T23:48:43.985Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "CardGameInstance.h",
+              "DocumentMoniker": "C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\CardGameInstance.h",
+              "RelativeDocumentMoniker": "CardGameInstance.h",
+              "ToolTip": "C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\CardGameInstance.h",
+              "RelativeToolTip": "CardGameInstance.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-10-29T16:14:05.019Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
               "Title": "MultiplayerGame.h",
               "DocumentMoniker": "C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\game\\MultiplayerGame.h",
               "RelativeDocumentMoniker": "game\\MultiplayerGame.h",
@@ -210,52 +255,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "RenderWorld.h",
-              "DocumentMoniker": "C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\renderer\\RenderWorld.h",
-              "RelativeDocumentMoniker": "renderer\\RenderWorld.h",
-              "ToolTip": "C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\renderer\\RenderWorld.h",
-              "RelativeToolTip": "renderer\\RenderWorld.h",
-              "ViewState": "AgIAAE0AAAAAAAAAAAAjwG0AAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-10-28T23:33:39.165Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "SysCmds.h",
               "DocumentMoniker": "C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\game\\gamesys\\SysCmds.h",
               "RelativeDocumentMoniker": "game\\gamesys\\SysCmds.h",
               "ToolTip": "C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\game\\gamesys\\SysCmds.h",
               "RelativeToolTip": "game\\gamesys\\SysCmds.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-10-28T23:30:54.487Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "Card.h",
-              "DocumentMoniker": "C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\Card.h",
-              "RelativeDocumentMoniker": "Card.h",
-              "ToolTip": "C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\Card.h",
-              "RelativeToolTip": "Card.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-10-28T23:26:22.284Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Card.cpp",
-              "DocumentMoniker": "C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\Card.cpp",
-              "RelativeDocumentMoniker": "Card.cpp",
-              "ToolTip": "C:\\Users\\Ethelyn\\Documents\\Game-Mod-Q4-F2025\\Card.cpp",
-              "RelativeToolTip": "Card.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-10-28T23:26:22.84Z"
             }
           ]
         }

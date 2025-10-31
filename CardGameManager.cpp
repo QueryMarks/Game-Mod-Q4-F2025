@@ -7,14 +7,21 @@
 #include "Card.h"
 #include "Deck.h"
 
-Card CardGameManager::cardPool[7] = {
-	Card("NOTAREALCARD", "NULL CARD DO NOT USE", false, 0, 0, 0),
-	Card("Healthpak", "This is a healthspak", false, 0, 0 ,0),
-	Card("Alien", "This is an aliens", true, 4, 2, 0),
-	Card("Marine", "It's the military perhaps", true, 3, 3, 0),
-	Card("Rock", "Rocks fall everyone dies", true, 1, 5, 0),
-	Card("Swordy", "Sometimes a sword is really cool in a science fiction setting ok", true, 5, 1, 0),
-	Card("BadCard", "This card is awful! Why", true, 1, 1, 0)
+Card CardGameManager::cardPool[14] = {
+	Card("NOTAREALCARD", "NULL CARD DO NOT USE", false, 0, 0, 0,0),
+	Card("Healthpak", "Restore all HP", false, 0, 0 ,0, Card().FULLHEAL),
+	Card("Alien", "This is an aliens", true, 4, 2, 0,0),
+	Card("Marine", "It's the military perhaps", true, 3, 3, 0,0),
+	Card("Rock", "Rocks fall everyone dies", true, 1, 5, 0,0),
+	Card("Swordy", idStr("That thing's sharp!"), true, 5, 1, 0,0),
+	Card("BadCard", "This card is awful! Why", true, 1, 1, 0,0),
+	Card("Bonuspak", "Draw 1", false, 0, 0, 0, Card().DRAW1),
+	Card("DrawParty", "Both draw 2", false, 0, 0, 0, Card().BOTHDRAW2),
+	Card("Bloodbaath", "Both become sheeps", false, 0, 0, 0, Card().BLOODBAATH),
+	Card("Sheep", "baa baa baa", true, 1, 2, 0, 0),
+	Card("Powercell", "Boost atk by 1", false, 0, 0, 0, Card().ATK1),
+	Card("Shieldpak", "Boost HP by 2", false, 0, 0, 0, Card().HP2),
+	Card("Teleswap", "Switch battler on each side", false, 0, 0, 0, Card().SWAPCARDS)
 };
 
 
@@ -30,10 +37,17 @@ CardGameManager::CardGameManager() {
 	deckContents.Append(HEALTHPAK);
 	deckContents.Append(ALIEN);
 	deckContents.Append(MARINE);
+	deckContents.Append(ROCK);
+	deckContents.Append(SWORDY);
+	deckContents.Append(BONUSPAK);
+	deckContents.Append(POWERCELL);
+	deckContents.Append(SHIELDPAK);
+	deckContents.Append(TELESWAP);
 	/*deckContents.Append(ROCK);
 	deckContents.Append(SWORDY);
 	deckContents.Append(BADCARD);*/
 	playerDeck.deckContents = deckContents;
+	playerMoneys = 100;
 };
 
 
