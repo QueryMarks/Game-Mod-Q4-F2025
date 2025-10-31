@@ -3069,19 +3069,51 @@ void Cmd_UpdateCardStats(const idCmdArgs& args) {
 void UpdateCardStats(Card card, int index) {
 	common->Printf("Made it into UpdateCardStats with index %d\n", index);
 	idUserInterface* mainMenu = uiManager->FindGui("guis/mainmenu.gui", true, false, true);
-	idStr myString = idStr("player_hand_text_") + idStr(index);
-	idStr cardString;
-	if (card.battler) {
-		cardString = card.name.c_str() + idStr("\n\n\n\nA") + idStr(card.atk) + idStr("  H") + idStr(card.hp) + idStr("/") + idStr(card.maxHP);
-		mainMenu->SetStateBool(idStr("player_hand_boost_") + idStr(index), false);
+	if (index < 5) {
+		idStr myString = idStr("player_hand_text_") + idStr(index);
+		idStr cardString;
+		if (card.battler) {
+			cardString = card.name.c_str() + idStr("\n\n\n\nA") + idStr(card.atk) + idStr("  H") + idStr(card.hp) + idStr("/") + idStr(card.maxHP);
+			mainMenu->SetStateBool(idStr("player_hand_boost_") + idStr(index), false);
+		}
+		else {
+			cardString = card.name.c_str();
+			mainMenu->SetStateBool(idStr("player_hand_boost_") + idStr(index), true);
+		}
+		mainMenu->SetStateString(myString.c_str(), cardString.c_str());
+		common->Printf(idStr("player_hand_visible_") + idStr(index));
+		mainMenu->SetStateBool(idStr("player_hand_visible_") + idStr(index), true);
 	}
-	else {
-		cardString = card.name.c_str();
-		mainMenu->SetStateBool(idStr("player_hand_boost_") + idStr(index),true);
+	else if (index == 5) {
+		idStr myString = idStr("player_battler_text");
+		idStr cardString;
+		if (card.name == "Blank") {
+			mainMenu->SetStateBool(idStr("player_battler_visible"), false);
+
+		}
+		else {
+
+			cardString = card.name.c_str() + idStr("\n\n\n\nA") + idStr(card.atk) + idStr("  H") + idStr(card.hp) + idStr("/") + idStr(card.maxHP);
+			mainMenu->SetStateString(myString.c_str(), cardString.c_str());
+			mainMenu->SetStateBool(idStr("player_battler_visible"), true);
+		}
+		
 	}
-	mainMenu->SetStateString(myString.c_str(), cardString.c_str());
-	common->Printf(idStr("player_hand_visible_") + idStr(index));
-	mainMenu->SetStateBool(idStr("player_hand_visible_") + idStr(index), true);
+	else if (index == 6) {
+		idStr myString = idStr("player_boost_text");
+		idStr cardString;
+		if (card.name == "Blank") {
+			mainMenu->SetStateBool(idStr("player_boost_visible"), false);
+
+		}
+		else {
+
+			cardString = card.name.c_str();
+			mainMenu->SetStateString(myString.c_str(), cardString.c_str());
+			mainMenu->SetStateBool(idStr("player_battler_visible"), true);
+		}
+		
+	}
 }
 
 void DisplayHands() {
@@ -3102,6 +3134,7 @@ void DisplayHands() {
 	}
 
 	if (cardGameInstance.playerBattler.name != "Blank") {
+		common->Printf("Displaying player battler\n");
 		UpdateCardStats(cardGameInstance.playerBattler, 5);
 	}
 
@@ -3130,9 +3163,13 @@ void Cmd_StartCardGame(const idCmdArgs& args) {
 
 
 void Cmd_PlayPlayerCard(const idCmdArgs& args) {
+	common->Printf("in playplayercard\n");
 	int cardIndex = *args.Argv(1) - '0';
 	if ((cardGameInstance.cardGameState = cardGameInstance.PLAYBATTLER) && (cardGameManager.cardPool[cardGameInstance.playerHand[cardIndex]].battler = true)) {
-		cardGameInstance.PlayBattler(cardIndex, true);
+		common->Printf("calling playBattler");
+		//cardGameInstance.PlayBattler(cardIndex, true);
+		cardGameInstance.playerBattler = cardGameManager.cardPool[cardGameInstance.playerHand[cardIndex]].CloneCard();
+		cardGameInstance.playerHand.RemoveIndex(cardIndex);
 	}
 	else if ((cardGameInstance.cardGameState = cardGameInstance.PLAYBOOST) && (cardGameManager.cardPool[cardGameInstance.playerHand[cardIndex]].battler = false)) {
 		cardGameInstance.PlayBoost(cardIndex, true);
@@ -3182,6 +3219,9 @@ void Cmd_UpdateCardExamine(const idCmdArgs& args) {
 	if (cardIndex <= 4) {
 		Card card = cardGameManager.cardPool[cardGameInstance.playerHand[cardIndex]];
 		UpdateCardExamine(card);
+	}
+	else if (cardIndex == 5) {
+		UpdateCardExamine(cardGameInstance.playerBattler);
 	}
 
 }
@@ -3421,6 +3461,7 @@ void idGameLocal::InitConsoleCommands( void ) {
 	cmdSystem->AddCommand( "updateCardExamine", Cmd_UpdateCardExamine,  CMD_FL_GAME|CMD_FL_CHEAT, "Updates card examine");
 	cmdSystem->AddCommand( "testPlayerDeck",        Cmd_TestPlayerDeck,         CMD_FL_GAME|CMD_FL_CHEAT, "Prints first card in player's deck");
 	cmdSystem->AddCommand( "startCardGame",         Cmd_StartCardGame,          CMD_FL_GAME|CMD_FL_CHEAT, "Starts the card game up");
+	cmdSystem->AddCommand( "playPlayerCard",        Cmd_PlayPlayerCard,         CMD_FL_GAME|CMD_FL_CHEAT, "Plays a card from the player's hand");
 }
 //ETHELYN END
 

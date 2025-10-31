@@ -7,6 +7,7 @@
 #include "Deck.h"
 #include "Card.h"
 #include "CardGameInstance.h"
+#include "CardGameManager.h"
 
 CardGameInstance::CardGameInstance() {
 	playerDeck = Deck();
@@ -92,10 +93,4 @@ void CardGameInstance::StartGame() {
 
 
 	cardGameState = PLAYBATTLER;
-}
-void CardGameInstance::PlayBattler(int handIndex, bool playerCard) {
-
-}
-void CardGameInstance::PlayBoost(int handIndex, bool playerCard) {
-
 }
