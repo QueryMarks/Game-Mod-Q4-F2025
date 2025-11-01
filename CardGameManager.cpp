@@ -7,7 +7,7 @@
 #include "Card.h"
 #include "Deck.h"
 
-Card CardGameManager::cardPool[19] = {
+Card CardGameManager::cardPool[26] = {
 	Card("NOTAREALCARD", "NULL CARD DO NOT USE", false, 0, 0, 0,0),
 	Card("Healthpak", "Restore all HP", false, 0, 0 ,0, Card().FULLHEAL),
 	Card("Alien", "This is an aliens", true, 4, 2, 0,0),
@@ -26,7 +26,15 @@ Card CardGameManager::cardPool[19] = {
 	Card("Flag", "Gain 1 point", false, 0, 0, 0, Card().GAINPOINT),
 	Card("Flagbuster", "Remove 1pt from opp", false, 0, 0, 0, Card().REMOVEOPPONENTPOINT),
 	Card("Weakener", "Lower opp atk by 1", false, 0, 0, 0, Card().REMOVEATK1),
-	Card("Sheephands", "All hands become sheeps", false, 0, 0, 0, Card().SHEEPHANDS)
+	Card("Sheephands", "All hands become sheeps", false, 0, 0, 0, Card().SHEEPHANDS),
+	Card("Gunner", "Pewpewpew", true, 2, 2, 0, 0),
+	Card("Coolguy", "What a cool guy", true, 3, 2, 0, 0),
+	Card("Doomguy", "do not sue me", true, 4, 4, 0, 0),
+	Card("Dog", "it's dog. woof woof", true, 2, 3, 0, 0),
+	Card("Pizza del.", "30 minutes or it's free!", true, 2, 1, 0, 0),
+	Card("Fish", "Fish used splash!", true, 0, 2, 0, 0),
+	Card("B.E.W.D", "wait a second", true, 3000, 2500, 0, 0)
+
 };
 
 
@@ -34,6 +42,7 @@ Card CardGameManager::cardPool[19] = {
 
 
 Deck CardGameManager::playerDeck = Deck();
+Deck CardGameManager::playerCollection = Deck();
 
 CardGameManager::CardGameManager() {
 	
@@ -43,15 +52,19 @@ CardGameManager::CardGameManager() {
 	deckContents.Append(ALIEN);
 	deckContents.Append(MARINE);
 	deckContents.Append(ROCK);
-	deckContents.Append(SWORDY);
+	deckContents.Append(FLAGBUSTER);
 	deckContents.Append(BONUSPAK);
 	deckContents.Append(POWERCELL);
 	deckContents.Append(SHIELDPAK);
 	deckContents.Append(TELESWAP);
 	deckContents.Append(WEAKENER);
 	deckContents.Append(WEAKENER);
-	deckContents.Append(SHEEPHANDS);
-	deckContents.Append(SHEEPHANDS);
+	deckContents.Append(DOG);
+	deckContents.Append(FISH);
+	deckContents.Append(GUNNER);
+	deckContents.Append(GUNNER);
+	deckContents.Append(PIZZADELIVERY);
+
 	/*deckContents.Append(ROCK);
 	deckContents.Append(SWORDY);
 	deckContents.Append(BADCARD);*/

@@ -3302,7 +3302,16 @@ void ResolveCardEffect(int effect, bool player) {
 			cardGameInstance.opponentBattler.hp += 2;
 		}
 		break;
-
+	case exampleCard.FULLHEAL:
+		if (player) {
+			cardGameInstance.playerBattler.hp = cardGameInstance.playerBattler.maxHP;
+			break;
+		}
+		else {
+			cardGameInstance.opponentBattler.hp = cardGameInstance.opponentBattler.maxHP;
+			break;
+		}
+		break;
 	case exampleCard.SWAPCARDS:
 		tempCard = cardGameInstance.playerBattler;
 		cardGameInstance.playerBattler = cardGameInstance.opponentBattler;
@@ -3566,8 +3575,8 @@ void UpdateCardExamine(Card card) {
 void Cmd_UpdateCardExamine(const idCmdArgs& args) {
 	idUserInterface* mainMenu = uiManager->FindGui("guis/mainmenu.gui", true, false, true);
 	int cardIndex = *args.Argv(1)  - '0';
-	common->Printf("The argument used is %s\n", args.Argv(1));
-	common->Printf("The integer is %d\n", cardIndex);
+	/*common->Printf("The argument used is %s\n", args.Argv(1));
+	common->Printf("The integer is %d\n", cardIndex);*/
 	if (cardIndex <= 4) {
 		Card card = cardGameManager.cardPool[cardGameInstance.playerHand[cardIndex]];
 		UpdateCardExamine(card);
@@ -3601,6 +3610,232 @@ void Cmd_TestPlayerDeck(const idCmdArgs& args) {
 	Cmd_UpdateCardStats(idCmdArgs());
 
 }
+////////////////
+//SHOP SCRIPTS//
+////////////////
+
+void UpdateShopStats(Card card, int index) {
+	idUserInterface* mainMenu = uiManager->FindGui("guis/mainmenu.gui", true, false, true);
+	if (index < 3) {
+		idStr myString = idStr("shop_item_text_") + idStr(index);
+		idStr cardString;
+		if (card.battler) {
+			cardString = card.name.c_str() + idStr("\n\n\n\nA") + idStr(card.atk) + idStr("  H") + idStr(card.hp) + idStr("/") + idStr(card.maxHP);
+			mainMenu->SetStateBool(idStr("shop_item_boost_") + idStr(index), false);
+		}
+		else {
+			cardString = card.name.c_str();
+			mainMenu->SetStateBool(idStr("shop_item_boost_") + idStr(index), true);
+		}
+		mainMenu->SetStateString(myString.c_str(), cardString.c_str());
+		common->Printf(idStr("shop_item_visible_") + idStr(index));
+		mainMenu->SetStateBool(idStr("shop_item_visible_") + idStr(index), true);
+	}
+}
+
+void Cmd_DisplayShop(const idCmdArgs& args) {
+	idRandom randomShop = idRandom();
+	randomShop.SetSeed(time(0));
+	for (int i = 0; i < 3; i++) {
+		//Random int from 1 to end of cardpool
+		cardGameManager.shopItems[i] = 1 + randomShop.RandomInt( (sizeof(cardGameManager.cardPool)/sizeof(cardGameManager.cardPool[0])) - 1);
+	}
+	for (int i = 0; i < 3; i++) {
+		UpdateShopStats(cardGameManager.cardPool[ cardGameManager.shopItems[i] ], i);
+	}
+	idUserInterface* mainMenu = uiManager->FindGui("guis/mainmenu.gui", true, false, true);
+	mainMenu->SetStateString("card_player_moneys_shop", idStr(cardGameManager.playerMoneys));
+}
+
+
+
+void UpdateShopExamine(Card card) {
+	idUserInterface* mainMenu = uiManager->FindGui("guis/mainmenu.gui", true, false, true);
+	mainMenu->SetStateString("card_examine_shop_name", card.name);
+	mainMenu->SetStateString("card_examine_shop_description", card.description);
+	if (card.battler) {
+		mainMenu->SetStateString("card_examine_shop_atk", idStr("Atk: ") + idStr(card.tempAtk));
+		mainMenu->SetStateString("card_examine_shop_hp", idStr("HP: ") + idStr(card.hp) + "/" + idStr(card.maxHP));
+		mainMenu->SetStateBool("card_examine_shop_boost", false);
+	}
+	else {
+		mainMenu->SetStateString("card_examine_shop_atk", idStr(""));
+		mainMenu->SetStateString("card_examine_shop_hp", idStr(""));
+		mainMenu->SetStateBool("card_examine_shop_boost", false);
+		mainMenu->SetStateBool("card_examine_shop_boost", true);
+	}
+}
+
+void Cmd_UpdateShopExamine(const idCmdArgs& args) {
+	common->Printf("updating shop examine\n");
+		idUserInterface* mainMenu = uiManager->FindGui("guis/mainmenu.gui", true, false, true);
+		int cardIndex = *args.Argv(1) - '0';
+		common->Printf("The argument used is %s\n", args.Argv(1));
+		common->Printf("The integer is %d\n", cardIndex);
+		if (cardIndex < 3) {
+			Card card = cardGameManager.cardPool[ cardGameManager.shopItems[cardIndex] ];
+			UpdateShopExamine(card);
+		}
+}
+
+
+void Cmd_BuyShopItem(const idCmdArgs& args) {
+	common->Printf("buying item");
+	int price = 50;
+	if (cardGameManager.playerMoneys >= price) {
+		cardGameManager.playerMoneys -= price;
+		int cardItem = *args.Argv(1) - '0';
+		cardGameManager.playerCollection.deckContents.Append(cardGameManager.shopItems[cardItem]);
+		idUserInterface* mainMenu = uiManager->FindGui("guis/mainmenu.gui", true, false, true);
+		mainMenu->SetStateBool(idStr("shop_item_visible_") + idStr(cardItem), false);
+		mainMenu->SetStateString("card_player_moneys", idStr(cardGameManager.playerMoneys));
+		mainMenu->SetStateString("card_player_moneys_shop", idStr(cardGameManager.playerMoneys));
+	}
+}
+
+/////////////
+//DECK EDIT//
+/////////////
+
+int itemsInDeckEdit = 40;
+bool deckView = true;
+
+void UpdateDeckeditStats(Card card, int index) {
+	idUserInterface* mainMenu = uiManager->FindGui("guis/mainmenu.gui", true, false, true);
+
+	if (index < 40) {
+		idStr myString = idStr("deck_item_text_") + idStr(index);
+		idStr cardString;
+		if (card.battler) {
+			cardString = card.name.c_str() + idStr("\n\n\n\nA") + idStr(card.atk) + idStr("  H") + idStr(card.hp) + idStr("/") + idStr(card.maxHP);
+			mainMenu->SetStateBool(idStr("deck_item_boost_") + idStr(index), false);
+		}
+		else {
+			cardString = card.name.c_str();
+			mainMenu->SetStateBool(idStr("deck_item_boost_") + idStr(index), true);
+		}
+		mainMenu->SetStateString(myString.c_str(), cardString.c_str());
+		common->Printf(idStr("deck_item_visible_") + idStr(index));
+		mainMenu->SetStateBool(idStr("deck_item_visible_") + idStr(index), true);
+	}
+	
+}
+
+void UpdateDeckeditStatsCollection(Card card, int index) {
+	idUserInterface* mainMenu = uiManager->FindGui("guis/mainmenu.gui", true, false, true);
+	if (index < 40) {
+		idStr myString = idStr("collection_item_text_") + idStr(index);
+		idStr cardString;
+		if (card.battler) {
+			cardString = card.name.c_str() + idStr("\n\n\n\nA") + idStr(card.atk) + idStr("  H") + idStr(card.hp) + idStr("/") + idStr(card.maxHP);
+			mainMenu->SetStateBool(idStr("collection_item_boost_") + idStr(index), false);
+		}
+		else {
+			cardString = card.name.c_str();
+			mainMenu->SetStateBool(idStr("collection_item_boost_") + idStr(index), true);
+		}
+		mainMenu->SetStateString(myString.c_str(), cardString.c_str());
+		common->Printf(idStr("collection_item_visible_") + idStr(index));
+		mainMenu->SetStateBool(idStr("collection_item_visible_") + idStr(index), true);
+	}
+}
+
+void Cmd_DisplayDeckedit(const idCmdArgs& args) {
+	idUserInterface* mainMenu = uiManager->FindGui("guis/mainmenu.gui", true, false, true);
+	
+	
+	for (int i = 0; i < itemsInDeckEdit; i++) {
+		mainMenu->SetStateBool("deck_item_visible_" + idStr(i), false);
+		mainMenu->SetStateBool("collection_item_visible_" + idStr(i), false);
+	}
+	if (deckView == true) {
+		mainMenu->SetStateBool("deck_edit_deck_visible", true);
+		mainMenu->SetStateBool("deck_edit_collection_visible", false);
+		for (int i = 0; i < cardGameManager.playerDeck.deckContents.Num(); i++) {
+			UpdateDeckeditStats(cardGameManager.cardPool[cardGameManager.playerDeck.deckContents[i]], i);
+		}
+	}
+	else {
+		mainMenu->SetStateBool("deck_edit_deck_visible", false);
+		mainMenu->SetStateBool("deck_edit_collection_visible", true);
+		for (int i = 0; i < cardGameManager.playerCollection.deckContents.Num(); i++) {
+			UpdateDeckeditStatsCollection(cardGameManager.cardPool[cardGameManager.playerCollection.deckContents[i]], i);
+		}
+	}
+	
+}
+
+
+
+void UpdateDeckeditExamine(Card card) {
+	idUserInterface* mainMenu = uiManager->FindGui("guis/mainmenu.gui", true, false, true);
+	mainMenu->SetStateString("card_examine_deckedit_name", card.name);
+	mainMenu->SetStateString("card_examine_deckedit_description", card.description);
+	if (card.battler) {
+		mainMenu->SetStateString("card_examine_deckedit_atk", idStr("Atk: ") + idStr(card.tempAtk));
+		mainMenu->SetStateString("card_examine_deckedit_hp", idStr("HP: ") + idStr(card.hp) + "/" + idStr(card.maxHP));
+		mainMenu->SetStateBool("card_examine_deckedit_boost", false);
+	}
+	else {
+		mainMenu->SetStateString("card_examine_deckedit_atk", idStr(""));
+		mainMenu->SetStateString("card_examine_deckedit_hp", idStr(""));
+		mainMenu->SetStateBool("card_examine_deckedit_boost", false);
+		mainMenu->SetStateBool("card_examine_deckedit_boost", true);
+	}
+}
+
+void Cmd_UpdateDeckeditExamine(const idCmdArgs& args) {
+	common->Printf("updating deckedit examine\n");
+	idUserInterface* mainMenu = uiManager->FindGui("guis/mainmenu.gui", true, false, true);
+	int cardIndex = atoi(args.Argv(1));
+
+	if (cardIndex < cardGameManager.playerDeck.deckContents.Num()) {
+		Card card = cardGameManager.cardPool[cardGameManager.playerDeck.deckContents[cardIndex]];
+		UpdateDeckeditExamine(card);
+	}
+}
+
+void Cmd_UpdateDeckeditExamineCollection(const idCmdArgs& args) {
+	common->Printf("updating deckedit examine\n");
+	idUserInterface* mainMenu = uiManager->FindGui("guis/mainmenu.gui", true, false, true);
+	int cardIndex = atoi(args.Argv(1));
+
+	if (cardIndex < cardGameManager.playerCollection.deckContents.Num()) {
+		Card card = cardGameManager.cardPool[cardGameManager.playerCollection.deckContents[cardIndex]];
+		UpdateDeckeditExamine(card);
+	}
+}
+
+
+void Cmd_DeckToCollection(const idCmdArgs& args) {
+	int cardIndex = atoi(args.Argv(1));
+	int cardToCopy = cardGameManager.playerDeck.deckContents[cardIndex];
+
+	cardGameManager.playerCollection.deckContents.Append(cardToCopy);
+	cardGameManager.playerDeck.deckContents.RemoveIndex(cardIndex);
+
+	Cmd_DisplayDeckedit(idCmdArgs());
+}
+
+void Cmd_CollectionToDeck(const idCmdArgs& args) {
+	int cardIndex = atoi(args.Argv(1));
+	int cardToCopy = cardGameManager.playerCollection.deckContents[cardIndex];
+
+	cardGameManager.playerDeck.deckContents.Append(cardToCopy);
+	cardGameManager.playerCollection.deckContents.RemoveIndex(cardIndex);
+
+	Cmd_DisplayDeckedit(idCmdArgs());
+}
+
+void Cmd_ViewDeck(const idCmdArgs& args) {
+	deckView = true;
+}
+void Cmd_ViewCollection(const idCmdArgs& args) {
+	deckView = false;
+}
+
+
+
 //ETHELYN END
 
 #ifndef _FINAL
@@ -3823,6 +4058,22 @@ void idGameLocal::InitConsoleCommands( void ) {
 	cmdSystem->AddCommand( "testPlayerDeck",        Cmd_TestPlayerDeck,         CMD_FL_GAME|CMD_FL_CHEAT, "Prints first card in player's deck");
 	cmdSystem->AddCommand( "startCardGame",         Cmd_StartCardGame,          CMD_FL_GAME|CMD_FL_CHEAT, "Starts the card game up");
 	cmdSystem->AddCommand( "playPlayerCard",        Cmd_PlayPlayerCard,         CMD_FL_GAME|CMD_FL_CHEAT, "Plays a card from the player's hand");
+
+
+	//Shop cmds
+	cmdSystem->AddCommand( "displayShop",           Cmd_DisplayShop,            CMD_FL_GAME|CMD_FL_CHEAT,   "Refreshes shop and displays new items");
+	cmdSystem->AddCommand( "updateShopExamine",     Cmd_UpdateShopExamine,      CMD_FL_GAME|CMD_FL_CHEAT,   "Updates card shop examiner");
+	cmdSystem->AddCommand( "buycardshopitem",           Cmd_BuyShopItem,            CMD_FL_GAME|CMD_FL_CHEAT,   "Buys card shop item");
+
+	//Deckedit cmds
+	cmdSystem->AddCommand("displayDeckedit", Cmd_DisplayDeckedit, CMD_FL_GAME | CMD_FL_CHEAT, "Opens deckedit");
+	cmdSystem->AddCommand("updateDeckExamine", Cmd_UpdateDeckeditExamine, CMD_FL_GAME | CMD_FL_CHEAT, "Refreshes deckedit examine");
+	cmdSystem->AddCommand("deckToCollection", Cmd_DeckToCollection, CMD_FL_GAME | CMD_FL_CHEAT, "Moves deck card to collection");
+	cmdSystem->AddCommand("collectionToDeck", Cmd_CollectionToDeck, CMD_FL_GAME | CMD_FL_CHEAT, "Moves collection item to deck");
+
+	cmdSystem->AddCommand("viewDeck", Cmd_ViewDeck, CMD_FL_GAME | CMD_FL_CHEAT, "view deck");
+	cmdSystem->AddCommand("viewCollection", Cmd_ViewCollection, CMD_FL_GAME | CMD_FL_CHEAT, "view collection");
+
 
 	//Hope this goes off once menu is loaded
 	idUserInterface* mainMenu = uiManager->FindGui("guis/mainmenu.gui", true, false, true);

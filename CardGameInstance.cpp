@@ -13,12 +13,29 @@ CardGameInstance::CardGameInstance() {
 	playerDeck = Deck();
 	mainMenu = NULL;
 	opponentDeck = Deck();
-	for (int i = 0; i < 15; i++) {
-		opponentDeck.deckContents.Append(6);
+	for (int i = 0; i < 3; i++) {
+		opponentDeck.deckContents.Append(2);
 	}
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < 2; i++) {
 		opponentDeck.deckContents.Append(1);
 	}
+	for (int i = 0; i < 3; i++) {
+		opponentDeck.deckContents.Append(19);
+	}
+	for (int i = 0; i < 2; i++) {
+		opponentDeck.deckContents.Append(17);
+	}
+	opponentDeck.deckContents.Append(6);
+	opponentDeck.deckContents.Append(3);
+	opponentDeck.deckContents.Append(11);
+	opponentDeck.deckContents.Append(20);
+	opponentDeck.deckContents.Append(12);
+	opponentDeck.deckContents.Append(6);
+	opponentDeck.deckContents.Append(10);
+	opponentDeck.deckContents.Append(16);
+	opponentDeck.deckContents.Append(8);
+	opponentDeck.deckContents.Append(7);
+	opponentDeck.deckContents.Append(14);
 	//Uncomment below when opponent has been added
 	//Opponent opponent;
 
@@ -37,12 +54,29 @@ CardGameInstance::CardGameInstance(Deck playerDeckGiven, idUserInterface* mainMe
 	playerDeck = playerDeckGiven.CloneDeck();
 	mainMenu = mainMenuGiven;
 	opponentDeck = Deck();
-	for (int i = 0; i < 15; i++) {
-		opponentDeck.deckContents.Append(6);
+	for (int i = 0; i < 3; i++) {
+		opponentDeck.deckContents.Append(2);
 	}
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < 2; i++) {
 		opponentDeck.deckContents.Append(1);
 	}
+	for (int i = 0; i < 3; i++) {
+		opponentDeck.deckContents.Append(19);
+	}
+	for (int i = 0; i < 2; i++) {
+		opponentDeck.deckContents.Append(17);
+	}
+	opponentDeck.deckContents.Append(6);
+	opponentDeck.deckContents.Append(3);
+	opponentDeck.deckContents.Append(11);
+	opponentDeck.deckContents.Append(20);
+	opponentDeck.deckContents.Append(12);
+	opponentDeck.deckContents.Append(6);
+	opponentDeck.deckContents.Append(10);
+	opponentDeck.deckContents.Append(16);
+	opponentDeck.deckContents.Append(8);
+	opponentDeck.deckContents.Append(7);
+	opponentDeck.deckContents.Append(14);
 	playerBattler = Card();
 	playerBoost = Card();
 	opponentBattler = Card();
@@ -61,12 +95,27 @@ void CardGameInstance::StartGame() {
 	for (int i = 0; i < opponentDeck.deckContents.Num(); i++) {
 		opponentDeck.deckContents.RemoveIndex(i);
 	}
-	for (int i = 0; i < 15; i++) {
-		opponentDeck.deckContents.Append(6);
+	for (int i = 0; i < 3; i++) {
+		opponentDeck.deckContents.Append(2);
 	}
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < 2; i++) {
 		opponentDeck.deckContents.Append(1);
 	}
+	for (int i = 0; i < 3; i++) {
+		opponentDeck.deckContents.Append(19);
+	}
+	for (int i = 0; i < 2; i++) {
+		opponentDeck.deckContents.Append(17);
+	}
+	opponentDeck.deckContents.Append(3);
+	opponentDeck.deckContents.Append(11);
+	opponentDeck.deckContents.Append(20);
+	opponentDeck.deckContents.Append(12);
+	opponentDeck.deckContents.Append(10);
+	opponentDeck.deckContents.Append(16);
+	opponentDeck.deckContents.Append(8);
+	opponentDeck.deckContents.Append(7);
+	opponentDeck.deckContents.Append(14);
 	playerBattler = Card();
 	opponentBattler = Card();
 	playerBoost = Card();

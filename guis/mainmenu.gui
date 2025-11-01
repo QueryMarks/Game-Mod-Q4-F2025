@@ -1027,6 +1027,79 @@ windowDef Desktop
 				onAction {
 					set "p_help::visible" "1" ;
 					set "btn_help::visible" "0" ;
+					set "p_main::visible" "0" ;
+					set "p_btns::visible" "0" ;
+				}
+
+			}
+			windowDef btn_card_game_start
+			{
+				rect	345,155,130,30
+				visible	1
+				backcolor	0,1,1,0.427
+				forecolor	1,1,1,1
+				text	"Card Battle"
+				textscale	0.4
+				font	"fonts/chain"
+
+				onAction {
+					set "p_cardgame::visible" "1" ;
+					consolecmd "startCardGame"
+					set "p_main::visible" "0" ;
+					set "p_btns::visible" "0" ;
+					
+				}
+
+			}
+			windowDef player_moneys
+			{
+				rect	395,200,100,30
+				visible	1
+				backcolor	1,1,0,0.427
+				forecolor	1,1,1,1
+				text	"gui::card_player_moneys"
+				textscale	0.5
+				font	"fonts/chain"
+
+				onAction {
+					set "p_cardshop::visible" "1" ;
+					consolecmd "displayShop" ;
+					set "p_main::visible" "0" ;
+					set "p_btns::visible" "0" ;
+				}
+
+			}
+			windowDef btn_shop
+			{
+				rect	435,240,100,30
+				visible	1
+				backcolor	1,1,0,0.427
+				forecolor	1,1,1,1
+				text	"Shop"
+				textscale	0.5
+				font	"fonts/chain"
+
+				onAction {
+					set "p_cardshop::visible" "1" ;
+					consolecmd "displayShop" ;
+					set "p_main::visible" "0" ;
+					set "p_btns::visible" "0" ;
+				}
+
+			}
+			windowDef btn_deck
+			{
+				rect	455,300,120,30
+				visible	1
+				backcolor	1,1,0,0.427
+				forecolor	1,1,1,1
+				text	"Deck Edit"
+				textscale	0.5
+				font	"fonts/chain"
+
+				onAction {
+					set "p_deckedit::visible" "1" ;
+					consoleCmd "displayDeckEdit" ;
 				}
 
 			}
@@ -26265,55 +26338,829 @@ windowDef Desktop
 
 		}
 	}
-	windowDef cardSmall
+	windowDef p_cardgame
 	{
-		rect	18,22,60,75
-		visible	1
-		backcolor	0,0.494,1,0.8
-		forecolor	1,1,1,1
-		text	"gui::card_text_1"
-		textscale	0.2
-		font	"fonts/lowpixel"
-
-		onMouseEnter {
-			
-			set "backcolor_w" "1" ;
-		}
-
-		onMouseExit {
-			transition "backcolor_w" "1" "0.8" "300" ;
-		}
-
-		onAction {
-			consolecmd "updatecardstats"
-		}
-
-		windowDef cardName
+		rect	0,0,640,480
+		visible	0
+		backcolor	0.494,0,0.243,1
+		windowDef cardExamineGame
 		{
-			rect	2,-1,57,17
-			visible	0
+			rect	8,91,208,278
+			visible	1
 			forecolor	1,1,1,1
-			text	"name"
+			backcolor	1,0.501,0,0.8
+			text	"gui::card_examine_game"
+			textscale	0.8
+			font	"fonts/lowpixel"
+
+			onMouseEnter {
+				
+				set "backcolor_w" "1" ;
+				
+			}
+
+			onMouseExit {
+				transition "backcolor_w" "1" "0.8" "300" ;
+				
+			}
+
+			onAction {
+				
+			}
+
+			windowDef cardExamineGameBoost
+			{
+				rect	0,0,208,278
+				visible	"gui::card_examine_game_boost"
+				backcolor	0,0.501,0.501,0.8
+			}
+			windowDef cardExamineGameDescription
+			{
+				rect	7,140,196,112
+				visible	1
+				forecolor	1,1,1,1
+				text	"gui::card_examine_game_description"
+				textscale	0.3
+				font	"fonts/lowpixel"
+			}
+			windowDef cardExamineGameHP
+			{
+				rect	106,237,98,38
+				visible	1
+				forecolor	1,1,1,1
+				text	"gui::card_examine_game_hp"
+				textscale	0.4
+				font	"fonts/lowpixel"
+				textalign	2
+			}
+			windowDef cardExamineGameAtk
+			{
+				rect	5,237,98,38
+				visible	1
+				forecolor	1,1,1,1
+				text	"gui::card_examine_game_atk"
+				textscale	0.4
+				font	"fonts/lowpixel"
+			}
+			windowDef cardExamineGameName
+			{
+				rect	6,5,193,38
+				visible	1
+				forecolor	1,1,1,1
+				text	"gui::card_examine_game_name"
+				textscale	0.8
+				font	"fonts/lowpixel"
+			}
+		}
+		windowDef playerHand_0
+		{
+			rect	229,385,60,75
+			visible	"gui::player_hand_visible_0"
+			backcolor	1,0.498,0,0.8
+
+			onMouseEnter {
+				
+				set "backcolor_w" "1" ;
+				consolecmd "updateCardExamine 0";
+			}
+
+			onMouseExit {
+				transition "backcolor_w" "1" "0.8" "300" ;
+			}
+
+			onAction {
+				consolecmd "playPlayerCard 0" ;
+			}
+
+			windowDef playerHandBoost_0
+			{
+				rect	0,0,60,75
+				visible	"gui::player_hand_boost_0"
+				backcolor	0,0.494,0.494,0.8
+			}
+			windowDef playerHandText_0
+			{
+				rect	0,0,60,75
+				visible	1
+				forecolor	1,1,1,1
+				text	"gui::player_hand_text_0"
+				textscale	0.2
+				font	"fonts/lowpixel"
+
+				onMouseEnter {
+					
+				}
+
+				onMouseExit {
+					
+				}
+
+				onAction {
+					consolecmd "playPlayerCard 0" ;
+				}
+
+			}
+		}
+		windowDef playerHand_1
+		{
+			rect	299,385,60,75
+			visible	"gui::player_hand_visible_1"
+			backcolor	1,0.501,0,0.8
+
+			onMouseEnter {
+				
+				set "backcolor_w" "1" ;
+				consolecmd "updateCardExamine 1";
+			}
+
+			onMouseExit {
+				transition "backcolor_w" "1" "0.8" "300" ;
+			}
+
+			onAction {
+				consolecmd "playPlayerCard 1" ;
+			}
+
+			windowDef playerHandBoost_1
+			{
+				rect	0,0,60,75
+				visible	"gui::player_hand_boost_1"
+				backcolor	0,0.494,0.494,0.8
+			}
+			windowDef playerHandText_1
+			{
+				rect	0,0,60,75
+				visible	1
+				forecolor	1,1,1,1
+				text	"gui::player_hand_text_1"
+				textscale	0.2
+				font	"fonts/lowpixel"
+
+				onMouseEnter {
+					
+				}
+
+				onMouseExit {
+					
+				}
+
+				onAction {
+					consolecmd "playPlayerCard 1" ;
+				}
+
+			}
+		}
+		windowDef playerHand_2
+		{
+			rect	369,385,60,75
+			visible	"gui::player_hand_visible_2"
+			backcolor	1,0.501,0,0.8
+
+			onMouseEnter {
+				
+				set "backcolor_w" "1" ;
+				consolecmd "updateCardExamine 2";
+			}
+
+			onMouseExit {
+				transition "backcolor_w" "1" "0.8" "300" ;
+			}
+
+			onAction {
+				consolecmd "playPlayerCard 2" ; 
+			}
+
+			windowDef playerHandBoost_2
+			{
+				rect	0,0,60,75
+				visible	"gui::player_hand_boost_2"
+				backcolor	0,0.494,0.494,0.8
+			}
+			windowDef playerHandText_2
+			{
+				rect	0,0,60,75
+				visible	1
+				forecolor	1,1,1,1
+				text	"gui::player_hand_text_2"
+				textscale	0.2
+				font	"fonts/lowpixel"
+
+				onMouseEnter {
+					
+				}
+
+				onMouseExit {
+					
+				}
+
+				onAction {
+					consolecmd "playPlayerCard 2" ;
+				}
+
+			}
+		}
+		windowDef playerHand_3
+		{
+			rect	439,385,60,75
+			visible	"gui::player_hand_visible_3"
+			backcolor	1,0.501,0,0.8
+
+			onMouseEnter {
+				
+				set "backcolor_w" "1" ;
+				consolecmd "updateCardExamine 3";
+			}
+
+			onMouseExit {
+				transition "backcolor_w" "1" "0.8" "300" ;
+			}
+
+			onAction {
+				consolecmd "playPlayerCard 3";
+			}
+
+			windowDef playerHandBoost_3
+			{
+				rect	0,0,60,75
+				visible	"gui::player_hand_boost_3"
+				backcolor	0,0.494,0.494,0.8
+			}
+			windowDef playerHandText_3
+			{
+				rect	0,0,60,75
+				visible	1
+				forecolor	1,1,1,1
+				text	"gui::player_hand_text_3"
+				textscale	0.2
+				font	"fonts/lowpixel"
+
+				onMouseEnter {
+					
+				}
+
+				onMouseExit {
+					
+				}
+
+				onAction {
+					consolecmd "playPlayerCard 3" ;
+				}
+
+			}
+		}
+		windowDef playerHand_4
+		{
+			rect	509,385,60,75
+			visible	"gui::player_hand_visible_4"
+			backcolor	1,0.501,0,0.8
+
+			onMouseEnter {
+				
+				set "backcolor_w" "1" ;
+				consolecmd "updateCardExamine 4";
+			}
+
+			onMouseExit {
+				transition "backcolor_w" "1" "0.8" "300" ;
+			}
+
+			onAction {
+				consolecmd "playPlayerCard 4"
+			}
+
+			windowDef playerHandBoost_4
+			{
+				rect	0,0,60,75
+				visible	"gui::player_hand_boost_4"
+				backcolor	0,0.494,0.494,0.8
+			}
+			windowDef playerHandText_4
+			{
+				rect	0,0,60,75
+				visible	1
+				forecolor	1,1,1,1
+				text	"gui::player_hand_text_4"
+				textscale	0.2
+				font	"fonts/lowpixel"
+
+				onMouseEnter {
+					
+				}
+
+				onMouseExit {
+					
+				}
+
+				onAction {
+					consolecmd "playPlayerCard 4" ;
+				}
+
+			}
+		}
+		windowDef playerBattler
+		{
+			rect	400,285,60,75
+			visible	"gui::player_battler_visible"
+			backcolor	1,0.498,0,0.8
+
+			onMouseEnter {
+				
+				set "backcolor_w" "1" ;
+				consolecmd "updateCardExamine 5";
+			}
+
+			onMouseExit {
+				transition "backcolor_w" "1" "0.8" "300" ;
+			}
+
+			onAction {
+				
+			}
+
+			windowDef playerBattlerText
+			{
+				rect	0,0,60,75
+				visible	1
+				forecolor	1,1,1,1
+				text	"gui::player_battler_text"
+				textscale	0.2
+				font	"fonts/lowpixel"
+
+				onMouseEnter {
+					
+				}
+
+				onMouseExit {
+					
+				}
+
+				onAction {
+					
+				}
+
+			}
+		}
+		windowDef opponentBattler
+		{
+			rect	400,185,60,75
+			visible	"gui::opponent_battler_visible"
+			backcolor	1,0.498,0,0.8
+
+			onMouseEnter {
+				
+				set "backcolor_w" "1" ;
+				consolecmd "updateCardExamine 7";
+			}
+
+			onMouseExit {
+				transition "backcolor_w" "1" "0.8" "300" ;
+			}
+
+			onAction {
+				
+			}
+
+			windowDef opponentBattlerText
+			{
+				rect	0,0,60,75
+				visible	1
+				forecolor	1,1,1,1
+				text	"gui::opponent_battler_text"
+				textscale	0.2
+				font	"fonts/lowpixel"
+
+				onMouseEnter {
+					
+				}
+
+				onMouseExit {
+					
+				}
+
+				onAction {
+					
+				}
+
+			}
+		}
+		windowDef playerBoost
+		{
+			rect	320,285,60,75
+			visible	"gui::player_boost_visible"
+			backcolor	0,0.494,0.494,0.8
+
+			onMouseEnter {
+				
+				set "backcolor_w" "1" ;
+				consolecmd "updateCardExamine 6";
+			}
+
+			onMouseExit {
+				transition "backcolor_w" "1" "0.8" "300" ;
+			}
+
+			onAction {
+				
+			}
+
+			windowDef playerBoostText
+			{
+				rect	0,0,60,75
+				visible	1
+				forecolor	1,1,1,1
+				text	"gui::player_boost_text"
+				textscale	0.2
+				font	"fonts/lowpixel"
+
+				onMouseEnter {
+					
+				}
+
+				onMouseExit {
+					
+				}
+
+				onAction {
+					
+				}
+
+			}
+		}
+		windowDef opponentBoost
+		{
+			rect	320,185,60,75
+			visible	"gui::opponent_boost_visible"
+			backcolor	0,0.494,0.494,0.8
+
+			onMouseEnter {
+				
+				set "backcolor_w" "1" ;
+				consolecmd "updateCardExamine 8";
+			}
+
+			onMouseExit {
+				transition "backcolor_w" "1" "0.8" "300" ;
+			}
+
+			onAction {
+				
+			}
+
+			windowDef opponentBoostText
+			{
+				rect	0,0,60,75
+				visible	1
+				forecolor	1,1,1,1
+				text	"gui::opponent_boost_text"
+				textscale	0.2
+				font	"fonts/lowpixel"
+
+				onMouseEnter {
+					
+				}
+
+				onMouseExit {
+					
+				}
+
+				onAction {
+					
+				}
+
+			}
+		}
+		windowDef playerNext
+		{
+			rect	509,285,60,75
+			visible	1
+			backcolor	0,1,0,0.8
+
+			onMouseEnter {
+				
+				set "backcolor_w" "1" ;
+			}
+
+			onMouseExit {
+				transition "backcolor_w" "1" "0.8" "300" ;
+			}
+
+			onAction {
+				consolecmd "playPlayerCard -1" 
+			}
+
+			windowDef playerNextText
+			{
+				rect	0,0,60,75
+				visible	1
+				forecolor	1,1,1,1
+				text	NEXT
+				textscale	0.3
+				font	"fonts/lowpixel"
+
+				onMouseEnter {
+					
+				}
+
+				onMouseExit {
+					
+				}
+
+				onAction {
+					consolecmd "playPlayerCard -1" 
+				}
+
+			}
+		}
+		windowDef currentStep
+		{
+			rect	509,185,60,30
+			visible	1
+			backcolor	0,1,0,0.8
+
+			onMouseEnter {
+				
+				set "backcolor_w" "1" ;
+			}
+
+			onMouseExit {
+				transition "backcolor_w" "1" "0.8" "300" ;
+			}
+
+			windowDef currentStepText
+			{
+				rect	0,0,60,75
+				visible	1
+				forecolor	1,1,1,1
+				text	"gui::current_step_text"
+				textscale	0.2
+				font	"fonts/lowpixel"
+
+				onMouseEnter {
+					
+				}
+
+				onMouseExit {
+					
+				}
+
+			}
+		}
+		windowDef playerPoints
+		{
+			rect	229,285,60,75
+			visible	1
+			backcolor	0,1,0,0.8
+
+			onMouseEnter {
+				
+				set "backcolor_w" "1" ;
+			}
+
+			onMouseExit {
+				transition "backcolor_w" "1" "0.8" "300" ;
+			}
+
+			onAction {
+				
+			}
+
+			windowDef playerPointsText
+			{
+				rect	0,0,60,75
+				visible	1
+				forecolor	1,1,1,1
+				text	"gui::player_points_text"
+				textscale	0.7
+				font	"fonts/lowpixel"
+
+				onMouseEnter {
+					
+				}
+
+				onMouseExit {
+					
+				}
+
+				onAction {
+					
+				}
+
+			}
+		}
+		windowDef opponentPoints
+		{
+			rect	229,100,60,75
+			visible	1
+			backcolor	0,1,0,0.8
+
+			onMouseEnter {
+				
+				set "backcolor_w" "1" ;
+			}
+
+			onMouseExit {
+				transition "backcolor_w" "1" "0.8" "300" ;
+			}
+
+			onAction {
+				
+			}
+
+			windowDef opponentPointsText
+			{
+				rect	0,0,60,75
+				visible	1
+				forecolor	1,1,1,1
+				text	"gui::opponent_points_text"
+				textscale	0.7
+				font	"fonts/lowpixel"
+
+				onMouseEnter {
+					
+				}
+
+				onMouseExit {
+					
+				}
+
+				onAction {
+					
+				}
+
+			}
+		}
+		windowDef cardSmall
+		{
+			rect	243,7,60,75
+			visible	0
+			backcolor	0,0.494,1,0.8
+			forecolor	1,1,1,1
+			text	"gui::card_text_1"
 			textscale	0.2
 			font	"fonts/lowpixel"
+
+			onMouseEnter {
+				
+				set "backcolor_w" "1" ;
+				consolecmd "updateCardExamine 1";
+			}
+
+			onMouseExit {
+				transition "backcolor_w" "1" "0.8" "300" ;
+			}
+
+			onAction {
+				consolecmd "playPlayerCard 0"
+			}
+
+			windowDef cardName
+			{
+				rect	2,-1,57,17
+				visible	0
+				forecolor	1,1,1,1
+				text	"name"
+				textscale	0.2
+				font	"fonts/lowpixel"
+			}
+			windowDef cardAtk
+			{
+				rect	0,61,17,16
+				visible	0
+				forecolor	1,1,1,1
+				text	"A1"
+				textscale	0.2
+				font	"fonts/lowpixel"
+			}
+			windowDef cardHP
+			{
+				rect	27,60,57,16
+				visible	0
+				forecolor	1,1,1,1
+				text	"H3/3"
+				textscale	0.2
+				font	"fonts/lowpixel"
+			}
 		}
-		windowDef cardAtk
+		windowDef opponentHand_0
 		{
-			rect	0,61,17,16
-			visible	0
-			forecolor	1,1,1,1
-			text	"A1"
-			textscale	0.2
-			font	"fonts/lowpixel"
+			rect	229,20,60,75
+			visible	"gui::opponent_hand_visible_0"
+			backcolor	0.3,0.3,0.3,0.8
+
+			onMouseEnter {
+				
+				set "backcolor_w" "1" ;
+			}
+
+			onMouseExit {
+				transition "backcolor_w" "1" "0.8" "300" ;
+			}
+
+			onAction {
+			}
+
 		}
-		windowDef cardHP
+		windowDef opponentHand_1
 		{
-			rect	27,60,57,16
-			visible	0
+			rect	299,20,60,75
+			visible	"gui::opponent_hand_visible_1"
+			backcolor	0.3,0.3,0.3,0.8
+
+			onMouseEnter {
+				
+				set "backcolor_w" "1" ;
+			}
+
+			onMouseExit {
+				transition "backcolor_w" "1" "0.8" "300" ;
+			}
+
+			onAction {
+			}
+
+		}
+		windowDef opponentHand_2
+		{
+			rect	369,20,60,75
+			visible	"gui::opponent_hand_visible_2"
+			backcolor	0.3,0.3,0.3,0.8
+
+			onMouseEnter {
+				
+				set "backcolor_w" "1" ;
+			}
+
+			onMouseExit {
+				transition "backcolor_w" "1" "0.8" "300" ;
+			}
+
+			onAction {
+			}
+
+		}
+		windowDef opponentHand_3
+		{
+			rect	439,20,60,75
+			visible	"gui::opponent_hand_visible_3"
+			backcolor	0.3,0.3,0.3,0.8
+
+			onMouseEnter {
+				
+				set "backcolor_w" "1" ;
+			}
+
+			onMouseExit {
+				transition "backcolor_w" "1" "0.8" "300" ;
+			}
+
+			onAction {
+			}
+
+		}
+		windowDef opponentHand_4
+		{
+			rect	509,20,60,75
+			visible	"gui::opponent_hand_visible_4"
+			backcolor	0.3,0.3,0.3,0.8
+
+			onMouseEnter {
+				
+				set "backcolor_w" "1" ;
+			}
+
+			onMouseExit {
+				transition "backcolor_w" "1" "0.8" "300" ;
+			}
+
+			onAction {
+			}
+
+		}
+		windowDef cardGameOver
+		{
+			rect	5,13,611,453
+			visible	"gui::card_game_over_visible"
 			forecolor	1,1,1,1
-			text	"H3/3"
-			textscale	0.2
+			text	"gui::card_game_over_text"
+			textscale	0.5
 			font	"fonts/lowpixel"
+			backcolor	0,0,1,0.8
+			windowDef btn_card_game_over
+			{
+				rect	175,341,78,59
+				visible	1
+				backcolor	0,1,0.250,0.501
+				forecolor	1,1,1,1
+				text	"OK"
+				textscale	1
+
+				onAction {
+					set "p_cardgame::visible" "0" ;
+					set "p_main::visible" "1" ;
+					set "p_buttons::visible" "1" ;
+				}
+
+			}
 		}
 	}
 	windowDef p_help
@@ -26321,7 +27168,8 @@ windowDef Desktop
 		rect	195,13,421,453
 		visible	0
 		forecolor	1,1,1,1
-		text	"Wecome to Quake 4 CARD BATTLE!!\n\nIn this mod you can battle it out vs the AI, earn credits, and spent them in the shop to get new cards.\n\nClick BATTLE in the pause menu during a game to fight the AI.\nPlace orange BATTLERs to battle the opponent. Green BOOSTs give you an upper hand.\nWin 3 fights to win the game.\n\nPress SHOP on the pause menu to buy cards with your credits.\nPress DECK EDIT on the pause menu to edit your deck."
+		backcolor	0.7,0.3,0.7,0.8
+		text	"Welcome to Quake 4 CARD BATTLE!!\n\nIn this mod you can battle it out vs the AI, earn credits, and spent them in the shop to get new cards.\n\nClick CARD BATTLE in the pause or main menu to fight the AI.\nPlace orange BATTLERs to battle the opponent. Place a green BOOST to get a powerful effect. You can use NEXT to progress the turn, even without playing cards.\nWin 3 combats to win the match!\n\nPress SHOP on the pause or main menu to buy cards with your credits.\nPress DECK EDIT on the pause or main menu to edit your deck."
 		textscale	0.3
 		font	"fonts/lowpixel"
 		windowDef btn_helpok
@@ -26336,6 +27184,2212 @@ windowDef Desktop
 			onAction {
 				set "p_help::visible" "0" ;
 				set "btn_help::visible" "1" ;
+				set "p_main::visible" "1" ;
+				set "p_buttons::visible" "1" ;
+			}
+
+		}
+	}
+	windowDef p_cardshop
+	{
+		rect	0,0,640,480
+		visible	0
+		backcolor	1,1,0.501,1
+		windowDef btn_shop_back
+		{
+			rect	15,399,143,56
+			visible	1
+			backcolor	0,1,0.243,0.494
+			forecolor	1,1,1,1
+			text	"BACK"
+			textscale	1
+
+			onAction {
+				set "p_cardshop::visible" "0" ;
+				set "p_main::visible" "1" ;
+				set "p_buttons::visible" "1" ;
+			}
+
+		}
+		windowDef cardExamineShop
+		{
+			rect	8,91,208,278
+			visible	1
+			forecolor	1,1,1,1
+			backcolor	1,0.498,0,0.8
+			text	"gui::card_examine_shop"
+			textscale	0.8
+			font	"fonts/lowpixel"
+
+			onMouseEnter {
+				
+				set "backcolor_w" "1" ;
+				
+			}
+
+			onMouseExit {
+				transition "backcolor_w" "1" "0.8" "300" ;
+				
+			}
+
+			onAction {
+				
+			}
+
+			windowDef cardExamineShopBoost
+			{
+				rect	0,0,208,278
+				visible	"gui::card_examine_shop_boost"
+				backcolor	0,0.498,0.498,0.8
+			}
+			windowDef cardExamineShopDescription
+			{
+				rect	7,140,196,112
+				visible	1
+				forecolor	1,1,1,1
+				text	"gui::card_examine_shop_description"
+				textscale	0.3
+				font	"fonts/lowpixel"
+			}
+			windowDef cardExamineShopHP
+			{
+				rect	106,237,98,38
+				visible	1
+				forecolor	1,1,1,1
+				text	"gui::card_examine_shop_hp"
+				textscale	0.4
+				font	"fonts/lowpixel"
+				textalign	2
+			}
+			windowDef cardExamineShopAtk
+			{
+				rect	5,237,98,38
+				visible	1
+				forecolor	1,1,1,1
+				text	"gui::card_examine_shop_atk"
+				textscale	0.4
+				font	"fonts/lowpixel"
+			}
+			windowDef cardExamineShopName
+			{
+				rect	6,5,193,38
+				visible	1
+				forecolor	1,1,1,1
+				text	"gui::card_examine_shop_name"
+				textscale	0.8
+				font	"fonts/lowpixel"
+			}
+		}
+		windowDef shopItem_0
+		{
+			rect	229,285,60,75
+			visible	"gui::shop_item_visible_0"
+			backcolor	1,0.498,0,0.8
+
+			onMouseEnter {
+				
+				set "backcolor_w" "1" ;
+				consolecmd "updateShopExamine 0";
+			}
+
+			onMouseExit {
+				transition "backcolor_w" "1" "0.8" "300" ;
+			}
+
+			onAction {
+				consolecmd "buycardshopitem 0" ;
+			}
+
+			windowDef shopItemBoost_0
+			{
+				rect	0,0,60,75
+				visible	"gui::shop_item_boost_0"
+				backcolor	0,0.494,0.494,0.8
+			}
+			windowDef shopItemText_0
+			{
+				rect	0,0,60,75
+				visible	1
+				forecolor	1,1,1,1
+				text	"gui::shop_item_text_0"
+				textscale	0.2
+				font	"fonts/lowpixel"
+
+				onMouseEnter {
+					
+				}
+
+				onMouseExit {
+					
+				}
+
+				onAction {
+					consolecmd "buycardshopitem 0" ;
+				}
+
+			}
+		}
+		windowDef shopItem_1
+		{
+			rect	329,285,60,75
+			visible	"gui::shop_item_visible_1"
+			backcolor	1,0.498,0,0.8
+
+			onMouseEnter {
+				
+				set "backcolor_w" "1" ;
+				consolecmd "updateShopExamine 1";
+			}
+
+			onMouseExit {
+				transition "backcolor_w" "1" "0.8" "300" ;
+			}
+
+			onAction {
+				consolecmd "buycardshopitem 1" ;
+			}
+
+			windowDef shopItemBoost_0
+			{
+				rect	0,0,60,75
+				visible	"gui::shop_item_boost_1"
+				backcolor	0,0.494,0.494,0.8
+			}
+			windowDef shopItemText_1
+			{
+				rect	0,0,60,75
+				visible	1
+				forecolor	1,1,1,1
+				text	"gui::shop_item_text_1"
+				textscale	0.2
+				font	"fonts/lowpixel"
+
+				onMouseEnter {
+					
+				}
+
+				onMouseExit {
+					
+				}
+
+				onAction {
+					consolecmd "buycardshopitem 1" ;
+				}
+
+			}
+		}
+		windowDef shopItem_2
+		{
+			rect	429,285,60,75
+			visible	"gui::shop_item_visible_2"
+			backcolor	1,0.498,0,0.8
+
+			onMouseEnter {
+				
+				set "backcolor_w" "1" ;
+				consolecmd "updateShopExamine 2";
+			}
+
+			onMouseExit {
+				transition "backcolor_w" "1" "0.8" "300" ;
+			}
+
+			onAction {
+				consolecmd "buycardshopitem 2" ;
+			}
+
+			windowDef shopItemBoost_2
+			{
+				rect	0,0,60,75
+				visible	"gui::shop_item_boost_2"
+				backcolor	0,0.494,0.494,0.8
+
+				onAction {
+					consolecmd "buycardshopitem 2";
+				}
+
+			}
+			windowDef shopItemText_2
+			{
+				rect	0,0,60,75
+				visible	1
+				forecolor	1,1,1,1
+				text	"gui::shop_item_text_2"
+				textscale	0.2
+				font	"fonts/lowpixel"
+
+				onMouseEnter {
+					
+				}
+
+				onMouseExit {
+					
+				}
+
+				onAction {
+					consolecmd "buycardshopitem 2" ;
+				}
+
+			}
+		}
+		windowDef player_moneys_shop
+		{
+			rect	395,100,200,80
+			visible	1
+			backcolor	1,0.2,0.7,0.8
+			forecolor	1,1,1,1
+			text	"gui::card_player_moneys_shop"
+			textscale	0.8
+			font	"fonts/chain"
+
+			onAction {
+				set "p_cardshop::visible" "1" ;
+				consolecmd "displayShop" ;
+				set "p_main::visible" "0" ;
+				set "p_btns::visible" "0" ;
+			}
+
+		}
+	}
+	windowDef p_deckedit
+	{
+		rect	0,0,640,480
+		visible	0
+		backcolor	0.2,0.5,1,1
+		windowDef deckeditDeck
+		{
+			rect	0,0,640,480
+			visible	"gui::deck_edit_deck_visible"
+			backcolor	0.3,0.6,0.60,0.623
+			windowDef deckItem_0
+			{
+				rect	231,20,60,75
+				visible	"gui::deck_item_visible_0"
+				backcolor	1,0.498,0,0.8
+
+				onMouseEnter {
+					
+					set "backcolor_w" "1" ;
+					consolecmd "updatedeckExamine 0";
+				}
+
+				onMouseExit {
+					transition "backcolor_w" "1" "0.8" "300" ;
+				}
+
+				onAction {
+					consolecmd "deckToCollection 0" ;
+				}
+
+				windowDef deckItemBoost_0
+				{
+					rect	0,0,60,75
+					visible	"gui::deck_item_boost_0"
+					backcolor	0,0.494,0.494,0.8
+				}
+				windowDef deckItemText_0
+				{
+					rect	0,0,60,75
+					visible	1
+					forecolor	1,1,1,1
+					text	"gui::deck_item_text_0"
+					textscale	0.2
+					font	"fonts/lowpixel"
+
+					onMouseEnter {
+						set "deckItem_0::backcolor_w" "1" ;
+						consolecmd "updatedeckExamine 0";
+					}
+
+					onMouseExit {
+						transition "deckItem_0::backcolor_w" "1" "0.8" "300" ;
+					}
+
+					onAction {
+						consolecmd "deckToCollection 0" ;
+					}
+
+				}
+			}
+			windowDef deckItem_1
+			{
+				rect	301,20,60,75
+				visible	"gui::deck_item_visible_1"
+				backcolor	1,0.498,0,0.8
+
+				onMouseEnter {
+					
+					set "backcolor_w" "1" ;
+					consolecmd "updatedeckExamine 1";
+				}
+
+				onMouseExit {
+					transition "backcolor_w" "1" "0.8" "300" ;
+				}
+
+				onAction {
+					consolecmd "deckToCollection 1" ;
+				}
+
+				windowDef deckItemBoost_1
+				{
+					rect	0,0,60,75
+					visible	"gui::deck_item_boost_1"
+					backcolor	0,0.494,0.494,0.8
+				}
+				windowDef deckItemText_1
+				{
+					rect	0,0,60,75
+					visible	1
+					forecolor	1,1,1,1
+					text	"gui::deck_item_text_1"
+					textscale	0.2
+					font	"fonts/lowpixel"
+
+					onMouseEnter {
+						set "deckItem_1::backcolor_w" "1" ;
+						consolecmd "updatedeckExamine 1";
+					}
+
+					onMouseExit {
+						transition "deckItem_1::backcolor_w" "1" "0.8" "300" ;
+					}
+
+					onAction {
+						consolecmd "deckToCollection 1" ;
+					}
+
+				}
+			}
+			windowDef deckItem_2
+			{
+				rect	371,20,60,75
+				visible	"gui::deck_item_visible_2"
+				backcolor	1,0.498,0,0.8
+
+				onMouseEnter {
+					set "backcolor_w" "1" ;
+					consolecmd "updatedeckExamine 2";
+				}
+
+				onMouseExit {
+					transition "backcolor_w" "1" "0.8" "300" ;
+				}
+
+				onAction {
+					consolecmd "deckToCollection 2" ;
+				}
+
+				windowDef deckItemBoost_2
+				{
+					rect	0,0,60,75
+					visible	"gui::deck_item_boost_2"
+					backcolor	0,0.494,0.494,0.8
+				}
+				windowDef deckItemText_2
+				{
+					rect	0,0,60,75
+					visible	1
+					forecolor	1,1,1,1
+					text	"gui::deck_item_text_2"
+					textscale	0.2
+					font	"fonts/lowpixel"
+
+					onMouseEnter {
+						set "deckItem_2::backcolor_w" "1" ;
+						consolecmd "updatedeckExamine 2";
+					}
+
+					onMouseExit {
+						transition "deckItem_2::backcolor_w" "1" "0.8" "300" ;
+					}
+
+					onAction {
+						consolecmd "deckToCollection 2" ;
+					}
+
+				}
+			}
+			windowDef deckItem_3
+			{
+				rect	441,20,60,75
+				visible	"gui::deck_item_visible_3"
+				backcolor	1,0.498,0,0.8
+
+				onMouseEnter {
+					
+					set "backcolor_w" "1" ;
+					consolecmd "updatedeckExamine 3";
+				}
+
+				onMouseExit {
+					transition "backcolor_w" "1" "0.8" "300" ;
+				}
+
+				onAction {
+					consolecmd "deckToCollection 3" ;
+				}
+
+				windowDef deckItemBoost_3
+				{
+					rect	0,0,60,75
+					visible	"gui::deck_item_boost_3"
+					backcolor	0,0.494,0.494,0.8
+				}
+				windowDef deckItemText_3
+				{
+					rect	0,0,60,75
+					visible	1
+					forecolor	1,1,1,1
+					text	"gui::deck_item_text_3"
+					textscale	0.2
+					font	"fonts/lowpixel"
+
+					onMouseEnter {
+						set "deckItem_3::backcolor_w" "1" ;
+						consolecmd "updatedeckExamine 3";
+					}
+
+					onMouseExit {
+						transition "deckItem_3::backcolor_w" "1" "0.8" "300" ;
+					}
+
+					onAction {
+						consolecmd "deckToCollection 3" ;
+					}
+
+				}
+			}
+			windowDef deckItem_4
+			{
+				rect	503,20,60,75
+				visible	"gui::deck_item_visible_4"
+				backcolor	1,0.498,0,0.8
+
+				onMouseEnter {
+					
+					set "backcolor_w" "1" ;
+					consolecmd "updatedeckExamine 4";
+				}
+
+				onMouseExit {
+					transition "backcolor_w" "1" "0.8" "300" ;
+				}
+
+				onAction {
+					consolecmd "deckToCollection 4" ;
+				}
+
+				windowDef deckItemBoost_4
+				{
+					rect	0,0,60,75
+					visible	"gui::deck_item_boost_4"
+					backcolor	0,0.494,0.494,0.8
+				}
+				windowDef deckItemText_4
+				{
+					rect	0,0,60,75
+					visible	1
+					forecolor	1,1,1,1
+					text	"gui::deck_item_text_4"
+					textscale	0.2
+					font	"fonts/lowpixel"
+
+					onMouseEnter {
+						set "deckItem_4::backcolor_w" "1" ;
+						consolecmd "updatedeckExamine 4";
+					}
+
+					onMouseExit {
+						transition "deckItem_4::backcolor_w" "1" "0.8" "300" ;
+					}
+
+					onAction {
+						consolecmd "deckToCollection 4" ;
+					}
+
+				}
+			}
+			windowDef deckItem_5
+			{
+				rect	565,20,60,75
+				visible	"gui::deck_item_visible_5"
+				backcolor	1,0.498,0,0.8
+
+				onMouseEnter {
+					
+					set "backcolor_w" "1" ;
+					consolecmd "updatedeckExamine 5";
+				}
+
+				onMouseExit {
+					transition "backcolor_w" "1" "0.8" "300" ;
+				}
+
+				onAction {
+					consolecmd "deckToCollection 5" ;
+				}
+
+				windowDef deckItemBoost_5
+				{
+					rect	0,0,60,75
+					visible	"gui::deck_item_boost_5"
+					backcolor	0,0.494,0.494,0.8
+				}
+				windowDef deckItemText_5
+				{
+					rect	0,0,60,75
+					visible	1
+					forecolor	1,1,1,1
+					text	"gui::deck_item_text_5"
+					textscale	0.2
+					font	"fonts/lowpixel"
+
+					onMouseEnter {
+						set "deckItem_5::backcolor_w" "1" ;
+						consolecmd "updatedeckExamine 5";
+					}
+
+					onMouseExit {
+						transition "deckItem_5::backcolor_w" "1" "0.8" "300" ;
+					}
+
+					onAction {
+						consolecmd "deckToCollection 5" ;
+					}
+
+				}
+			}
+
+
+			windowDef deckItem_6
+			{
+				rect	231,100,60,75
+				visible	"gui::deck_item_visible_6"
+				backcolor	1,0.498,0,0.8
+
+				onMouseEnter {
+					
+					set "backcolor_w" "1" ;
+					consolecmd "updatedeckExamine 6";
+				}
+
+				onMouseExit {
+					transition "backcolor_w" "1" "0.8" "300" ;
+				}
+
+				onAction {
+					consolecmd "deckToCollection 6" ;
+				}
+
+				windowDef deckItemBoost_6
+				{
+					rect	0,0,60,75
+					visible	"gui::deck_item_boost_6"
+					backcolor	0,0.494,0.494,0.8
+				}
+				windowDef deckItemText_6
+				{
+					rect	0,0,60,75
+					visible	1
+					forecolor	1,1,1,1
+					text	"gui::deck_item_text_6"
+					textscale	0.2
+					font	"fonts/lowpixel"
+
+					onMouseEnter {
+						set "deckItem_6::backcolor_w" "1" ;
+						consolecmd "updatedeckExamine 6";
+					}
+
+					onMouseExit {
+						transition "deckItem_6::backcolor_w" "1" "0.8" "300" ;
+					}
+
+					onAction {
+						consolecmd "deckToCollection 6" ;
+					}
+
+				}
+			}
+			windowDef deckItem_7
+			{
+				rect	301,100,60,75
+				visible	"gui::deck_item_visible_7"
+				backcolor	1,0.498,0,0.8
+
+				onMouseEnter {
+					
+					set "backcolor_w" "1" ;
+					consolecmd "updatedeckExamine 7";
+				}
+
+				onMouseExit {
+					transition "backcolor_w" "1" "0.8" "300" ;
+				}
+
+				onAction {
+					consolecmd "deckToCollection 7" ;
+				}
+
+				windowDef deckItemBoost_7
+				{
+					rect	0,0,60,75
+					visible	"gui::deck_item_boost_7"
+					backcolor	0,0.494,0.494,0.8
+				}
+				windowDef deckItemText_7
+				{
+					rect	0,0,60,75
+					visible	1
+					forecolor	1,1,1,1
+					text	"gui::deck_item_text_7"
+					textscale	0.2
+					font	"fonts/lowpixel"
+
+					onMouseEnter {
+						set "deckItem_7::backcolor_w" "1" ;
+						consolecmd "updatedeckExamine 7";
+					}
+
+					onMouseExit {
+						transition "deckItem_7::backcolor_w" "1" "0.8" "300" ;
+					}
+
+					onAction {
+						consolecmd "deckToCollection 7" ;
+					}
+
+				}
+			}
+			windowDef deckItem_8
+			{
+				rect	371,100,60,75
+				visible	"gui::deck_item_visible_8"
+				backcolor	1,0.498,0,0.8
+
+				onMouseEnter {
+					set "backcolor_w" "1" ;
+					consolecmd "updatedeckExamine 8";
+				}
+
+				onMouseExit {
+					transition "backcolor_w" "1" "0.8" "300" ;
+				}
+
+				onAction {
+					consolecmd "deckToCollection 8" ;
+				}
+
+				windowDef deckItemBoost_8
+				{
+					rect	0,0,60,75
+					visible	"gui::deck_item_boost_8"
+					backcolor	0,0.494,0.494,0.8
+				}
+				windowDef deckItemText_8
+				{
+					rect	0,0,60,75
+					visible	1
+					forecolor	1,1,1,1
+					text	"gui::deck_item_text_8"
+					textscale	0.2
+					font	"fonts/lowpixel"
+
+					onMouseEnter {
+						set "deckItem_8::backcolor_w" "1" ;
+						consolecmd "updatedeckExamine 8";
+					}
+
+					onMouseExit {
+						transition "deckItem_8::backcolor_w" "1" "0.8" "300" ;
+					}
+
+					onAction {
+						consolecmd "deckToCollection 8" ;
+					}
+
+				}
+			}
+			windowDef deckItem_9
+			{
+				rect	441,100,60,75
+				visible	"gui::deck_item_visible_9"
+				backcolor	1,0.498,0,0.8
+
+				onMouseEnter {
+					
+					set "backcolor_w" "1" ;
+					consolecmd "updatedeckExamine 9";
+				}
+
+				onMouseExit {
+					transition "backcolor_w" "1" "0.8" "300" ;
+				}
+
+				onAction {
+					consolecmd "deckToCollection 9" ;
+				}
+
+				windowDef deckItemBoost_9
+				{
+					rect	0,0,60,75
+					visible	"gui::deck_item_boost_9"
+					backcolor	0,0.494,0.494,0.8
+				}
+				windowDef deckItemText_9
+				{
+					rect	0,0,60,75
+					visible	1
+					forecolor	1,1,1,1
+					text	"gui::deck_item_text_9"
+					textscale	0.2
+					font	"fonts/lowpixel"
+
+					onMouseEnter {
+						set "deckItem_9::backcolor_w" "1" ;
+						consolecmd "updatedeckExamine 9";
+					}
+
+					onMouseExit {
+						transition "deckItem_9::backcolor_w" "1" "0.8" "300" ;
+					}
+
+					onAction {
+						consolecmd "deckToCollection 9" ;
+					}
+
+				}
+			}
+			windowDef deckItem_10
+			{
+				rect	503,100,60,75
+				visible	"gui::deck_item_visible_10"
+				backcolor	1,0.498,0,0.8
+
+				onMouseEnter {
+					
+					set "backcolor_w" "1" ;
+					consolecmd "updatedeckExamine 10";
+				}
+
+				onMouseExit {
+					transition "backcolor_w" "1" "0.8" "300" ;
+				}
+
+				onAction {
+					consolecmd "deckToCollection 10" ;
+				}
+
+				windowDef deckItemBoost_10
+				{
+					rect	0,0,60,75
+					visible	"gui::deck_item_boost_10"
+					backcolor	0,0.494,0.494,0.8
+				}
+				windowDef deckItemText_10
+				{
+					rect	0,0,60,75
+					visible	1
+					forecolor	1,1,1,1
+					text	"gui::deck_item_text_10"
+					textscale	0.2
+					font	"fonts/lowpixel"
+
+					onMouseEnter {
+						set "deckItem_10::backcolor_w" "1" ;
+						consolecmd "updatedeckExamine 10";
+					}
+
+					onMouseExit {
+						transition "deckItem_10::backcolor_w" "1" "0.8" "300" ;
+					}
+
+					onAction {
+						consolecmd "deckToCollection 10" ;
+					}
+
+				}
+			}
+			windowDef deckItem_11
+			{
+				rect	565,100,60,75
+				visible	"gui::deck_item_visible_11"
+				backcolor	1,0.498,0,0.8
+
+				onMouseEnter {
+					
+					set "backcolor_w" "1" ;
+					consolecmd "updatedeckExamine 11";
+				}
+
+				onMouseExit {
+					transition "backcolor_w" "1" "0.8" "300" ;
+				}
+
+				onAction {
+					consolecmd "deckToCollection 11" ;
+				}
+
+				windowDef deckItemBoost_11
+				{
+					rect	0,0,60,75
+					visible	"gui::deck_item_boost_11"
+					backcolor	0,0.494,0.494,0.8
+				}
+				windowDef deckItemText_11
+				{
+					rect	0,0,60,75
+					visible	1
+					forecolor	1,1,1,1
+					text	"gui::deck_item_text_11"
+					textscale	0.2
+					font	"fonts/lowpixel"
+
+					onMouseEnter {
+						set "deckItem_11::backcolor_w" "1" ;
+						consolecmd "updatedeckExamine 11";
+					}
+
+					onMouseExit {
+						transition "deckItem_11::backcolor_w" "1" "0.8" "300" ;
+					}
+
+					onAction {
+						consolecmd "deckToCollection 11" ;
+					}
+
+				}
+			}
+
+
+
+			
+			windowDef deckItem_12
+			{
+				rect	231,180,60,75
+				visible	"gui::deck_item_visible_12"
+				backcolor	1,0.498,0,0.8
+
+				onMouseEnter {
+					
+					set "backcolor_w" "1" ;
+					consolecmd "updatedeckExamine 12";
+				}
+
+				onMouseExit {
+					transition "backcolor_w" "1" "0.8" "300" ;
+				}
+
+				onAction {
+					consolecmd "deckToCollection 12" ;
+				}
+
+				windowDef deckItemBoost_12
+				{
+					rect	0,0,60,75
+					visible	"gui::deck_item_boost_12"
+					backcolor	0,0.494,0.494,0.8
+				}
+				windowDef deckItemText_12
+				{
+					rect	0,0,60,75
+					visible	1
+					forecolor	1,1,1,1
+					text	"gui::deck_item_text_12"
+					textscale	0.2
+					font	"fonts/lowpixel"
+
+					onMouseEnter {
+						set "deckItem_12::backcolor_w" "1" ;
+						consolecmd "updatedeckExamine 12";
+					}
+
+					onMouseExit {
+						transition "deckItem_12::backcolor_w" "1" "0.8" "300" ;
+					}
+
+					onAction {
+						consolecmd "deckToCollection 12" ;
+					}
+
+				}
+			}
+			windowDef deckItem_13
+			{
+				rect	301,180,60,75
+				visible	"gui::deck_item_visible_13"
+				backcolor	1,0.498,0,0.8
+
+				onMouseEnter {
+					
+					set "backcolor_w" "1" ;
+					consolecmd "updatedeckExamine 13";
+				}
+
+				onMouseExit {
+					transition "backcolor_w" "1" "0.8" "300" ;
+				}
+
+				onAction {
+					consolecmd "deckToCollection 13" ;
+				}
+
+				windowDef deckItemBoost_13
+				{
+					rect	0,0,60,75
+					visible	"gui::deck_item_boost_13"
+					backcolor	0,0.494,0.494,0.8
+				}
+				windowDef deckItemText_13
+				{
+					rect	0,0,60,75
+					visible	1
+					forecolor	1,1,1,1
+					text	"gui::deck_item_text_13"
+					textscale	0.2
+					font	"fonts/lowpixel"
+
+					onMouseEnter {
+						set "deckItem_13::backcolor_w" "1" ;
+						consolecmd "updatedeckExamine 13";
+					}
+
+					onMouseExit {
+						transition "deckItem_13::backcolor_w" "1" "0.8" "300" ;
+					}
+
+					onAction {
+						consolecmd "deckToCollection 13" ;
+					}
+
+				}
+			}
+			windowDef deckItem_14
+			{
+				rect	371,180,60,75
+				visible	"gui::deck_item_visible_14"
+				backcolor	1,0.498,0,0.8
+
+				onMouseEnter {
+					set "backcolor_w" "1" ;
+					consolecmd "updatedeckExamine 14";
+				}
+
+				onMouseExit {
+					transition "backcolor_w" "1" "0.8" "300" ;
+				}
+
+				onAction {
+					consolecmd "deckToCollection 14" ;
+				}
+
+				windowDef deckItemBoost_14
+				{
+					rect	0,0,60,75
+					visible	"gui::deck_item_boost_14"
+					backcolor	0,0.494,0.494,0.8
+				}
+				windowDef deckItemText_14
+				{
+					rect	0,0,60,75
+					visible	1
+					forecolor	1,1,1,1
+					text	"gui::deck_item_text_14"
+					textscale	0.2
+					font	"fonts/lowpixel"
+
+					onMouseEnter {
+						set "deckItem_8::backcolor_w" "1" ;
+						consolecmd "updatedeckExamine 14";
+					}
+
+					onMouseExit {
+						transition "deckItem_14::backcolor_w" "1" "0.8" "300" ;
+					}
+
+					onAction {
+						consolecmd "deckToCollection 14" ;
+					}
+
+				}
+			}
+			windowDef deckItem_15
+			{
+				rect	441,180,60,75
+				visible	"gui::deck_item_visible_15"
+				backcolor	1,0.498,0,0.8
+
+				onMouseEnter {
+					
+					set "backcolor_w" "1" ;
+					consolecmd "updatedeckExamine 15";
+				}
+
+				onMouseExit {
+					transition "backcolor_w" "1" "0.8" "300" ;
+				}
+
+				onAction {
+					consolecmd "deckToCollection 15" ;
+				}
+
+				windowDef deckItemBoost_15
+				{
+					rect	0,0,60,75
+					visible	"gui::deck_item_boost_15"
+					backcolor	0,0.494,0.494,0.8
+				}
+				windowDef deckItemText_15
+				{
+					rect	0,0,60,75
+					visible	1
+					forecolor	1,1,1,1
+					text	"gui::deck_item_text_15"
+					textscale	0.2
+					font	"fonts/lowpixel"
+
+					onMouseEnter {
+						set "deckItem_9::backcolor_w" "1" ;
+						consolecmd "updatedeckExamine 15";
+					}
+
+					onMouseExit {
+						transition "deckItem_15::backcolor_w" "1" "0.8" "300" ;
+					}
+
+					onAction {
+						consolecmd "deckToCollection 15" ;
+					}
+
+				}
+			}
+			windowDef deckItem_16
+			{
+				rect	503,180,60,75
+				visible	"gui::deck_item_visible_16"
+				backcolor	1,0.498,0,0.8
+
+				onMouseEnter {
+					
+					set "backcolor_w" "1" ;
+					consolecmd "updatedeckExamine 16";
+				}
+
+				onMouseExit {
+					transition "backcolor_w" "1" "0.8" "300" ;
+				}
+
+				onAction {
+					consolecmd "deckToCollection 16" ;
+				}
+
+				windowDef deckItemBoost_16
+				{
+					rect	0,0,60,75
+					visible	"gui::deck_item_boost_16"
+					backcolor	0,0.494,0.494,0.8
+				}
+				windowDef deckItemText_16
+				{
+					rect	0,0,60,75
+					visible	1
+					forecolor	1,1,1,1
+					text	"gui::deck_item_text_16"
+					textscale	0.2
+					font	"fonts/lowpixel"
+
+					onMouseEnter {
+						set "deckItem_16::backcolor_w" "1" ;
+						consolecmd "updatedeckExamine 16";
+					}
+
+					onMouseExit {
+						transition "deckItem_16::backcolor_w" "1" "0.8" "300" ;
+					}
+
+					onAction {
+						consolecmd "deckToCollection 16" ;
+					}
+
+				}
+			}
+			windowDef deckItem_17
+			{
+				rect	565,180,60,75
+				visible	"gui::deck_item_visible_17"
+				backcolor	1,0.498,0,0.8
+
+				onMouseEnter {
+					
+					set "backcolor_w" "1" ;
+					consolecmd "updatedeckExamine 17";
+				}
+
+				onMouseExit {
+					transition "backcolor_w" "1" "0.8" "300" ;
+				}
+
+				onAction {
+					consolecmd "deckToCollection 17" ;
+				}
+
+				windowDef deckItemBoost_17
+				{
+					rect	0,0,60,75
+					visible	"gui::deck_item_boost_17"
+					backcolor	0,0.494,0.494,0.8
+				}
+				windowDef deckItemText_17
+				{
+					rect	0,0,60,75
+					visible	1
+					forecolor	1,1,1,1
+					text	"gui::deck_item_text_17"
+					textscale	0.2
+					font	"fonts/lowpixel"
+
+					onMouseEnter {
+						set "deckItem_5::backcolor_w" "1" ;
+						consolecmd "updatedeckExamine 17";
+					}
+
+					onMouseExit {
+						transition "deckItem_17::backcolor_w" "1" "0.8" "300" ;
+					}
+
+					onAction {
+						consolecmd "deckToCollection 17" ;
+					}
+
+				}
+			}
+		}
+		
+		windowDef deckeditCollection
+		{
+			rect	0,0,640,480
+			visible	"gui::deck_edit_collection_visible"
+
+			windowDef collectionItem_0
+			{
+				rect	231,20,60,75
+				visible	"gui::collection_item_visible_0"
+				backcolor	1,0.498,0,0.8
+
+				onMouseEnter {
+					
+					set "backcolor_w" "1" ;
+					consolecmd "updatecollectionExamine 0";
+				}
+
+				onMouseExit {
+					transition "backcolor_w" "1" "0.8" "300" ;
+				}
+
+				onAction {
+					consolecmd "collectionToDeck 0" ;
+				}
+
+				windowDef collectionItemBoost_0
+				{
+					rect	0,0,60,75
+					visible	"gui::collection_item_boost_0"
+					backcolor	0,0.494,0.494,0.8
+				}
+				windowDef collectionItemText_0
+				{
+					rect	0,0,60,75
+					visible	1
+					forecolor	1,1,1,1
+					text	"gui::collection_item_text_0"
+					textscale	0.2
+					font	"fonts/lowpixel"
+
+					onMouseEnter {
+						set "collectionItem_0::backcolor_w" "1" ;
+						consolecmd "updatecollectionExamine 0";
+					}
+
+					onMouseExit {
+						transition "collectionItem_0::backcolor_w" "1" "0.8" "300" ;
+					}
+
+					onAction {
+						consolecmd "collectionToDeck 0" ;
+					}
+
+				}
+			}
+			windowDef collectionItem_1
+			{
+				rect	301,20,60,75
+				visible	"gui::collection_item_visible_1"
+				backcolor	1,0.498,0,0.8
+
+				onMouseEnter {
+					
+					set "backcolor_w" "1" ;
+					consolecmd "updatecollectionExamine 1";
+				}
+
+				onMouseExit {
+					transition "backcolor_w" "1" "0.8" "300" ;
+				}
+
+				onAction {
+					consolecmd "collectionToDeck 1" ;
+				}
+
+				windowDef collectionItemBoost_1
+				{
+					rect	0,0,60,75
+					visible	"gui::collection_item_boost_1"
+					backcolor	0,0.494,0.494,0.8
+				}
+				windowDef collectionItemText_1
+				{
+					rect	0,0,60,75
+					visible	1
+					forecolor	1,1,1,1
+					text	"gui::collection_item_text_1"
+					textscale	0.2
+					font	"fonts/lowpixel"
+
+					onMouseEnter {
+						set "collectionItem_1::backcolor_w" "1" ;
+						consolecmd "updatecollectionExamine 1";
+					}
+
+					onMouseExit {
+						transition "collectionItem_1::backcolor_w" "1" "0.8" "300" ;
+					}
+
+					onAction {
+						consolecmd "collectionToDeck 1" ;
+					}
+
+				}
+			}
+			windowDef collectionItem_2
+			{
+				rect	371,20,60,75
+				visible	"gui::collection_item_visible_2"
+				backcolor	1,0.498,0,0.8
+
+				onMouseEnter {
+					set "backcolor_w" "1" ;
+					consolecmd "updatecollectionExamine 2";
+				}
+
+				onMouseExit {
+					transition "backcolor_w" "1" "0.8" "300" ;
+				}
+
+				onAction {
+					consolecmd "collectionToDeck 2" ;
+				}
+
+				windowDef collectionItemBoost_2
+				{
+					rect	0,0,60,75
+					visible	"gui::collection_item_boost_2"
+					backcolor	0,0.494,0.494,0.8
+				}
+				windowDef collectionItemText_2
+				{
+					rect	0,0,60,75
+					visible	1
+					forecolor	1,1,1,1
+					text	"gui::collection_item_text_2"
+					textscale	0.2
+					font	"fonts/lowpixel"
+
+					onMouseEnter {
+						set "collectionItem_2::backcolor_w" "1" ;
+						consolecmd "updatecollectionExamine 2";
+					}
+
+					onMouseExit {
+						transition "collectionItem_2::backcolor_w" "1" "0.8" "300" ;
+					}
+
+					onAction {
+						consolecmd "collectionToDeck 2" ;
+					}
+
+				}
+			}
+			windowDef collectionItem_3
+			{
+				rect	441,20,60,75
+				visible	"gui::collection_item_visible_3"
+				backcolor	1,0.498,0,0.8
+
+				onMouseEnter {
+					
+					set "backcolor_w" "1" ;
+					consolecmd "updatecollectionExamine 3";
+				}
+
+				onMouseExit {
+					transition "backcolor_w" "1" "0.8" "300" ;
+				}
+
+				onAction {
+					consolecmd "collectionToDeck 3" ;
+				}
+
+				windowDef collectionItemBoost_3
+				{
+					rect	0,0,60,75
+					visible	"gui::collection_item_boost_3"
+					backcolor	0,0.494,0.494,0.8
+				}
+				windowDef collectionItemText_3
+				{
+					rect	0,0,60,75
+					visible	1
+					forecolor	1,1,1,1
+					text	"gui::collection_item_text_3"
+					textscale	0.2
+					font	"fonts/lowpixel"
+
+					onMouseEnter {
+						set "collectionItem_3::backcolor_w" "1" ;
+						consolecmd "updatecollectionExamine 3";
+					}
+
+					onMouseExit {
+						transition "collectionItem_3::backcolor_w" "1" "0.8" "300" ;
+					}
+
+					onAction {
+						consolecmd "collectionToDeck 3" ;
+					}
+
+				}
+			}
+			windowDef collectionItem_4
+			{
+				rect	503,20,60,75
+				visible	"gui::collection_item_visible_4"
+				backcolor	1,0.498,0,0.8
+
+				onMouseEnter {
+					
+					set "backcolor_w" "1" ;
+					consolecmd "updatecollectionExamine 4";
+				}
+
+				onMouseExit {
+					transition "backcolor_w" "1" "0.8" "300" ;
+				}
+
+				onAction {
+					consolecmd "collectionToDeck 4" ;
+				}
+
+				windowDef collectionItemBoost_4
+				{
+					rect	0,0,60,75
+					visible	"gui::collection_item_boost_4"
+					backcolor	0,0.494,0.494,0.8
+				}
+				windowDef collectionItemText_4
+				{
+					rect	0,0,60,75
+					visible	1
+					forecolor	1,1,1,1
+					text	"gui::collection_item_text_4"
+					textscale	0.2
+					font	"fonts/lowpixel"
+
+					onMouseEnter {
+						set "collectionItem_4::backcolor_w" "1" ;
+						consolecmd "updatecollectionExamine 4";
+					}
+
+					onMouseExit {
+						transition "collectionItem_4::backcolor_w" "1" "0.8" "300" ;
+					}
+
+					onAction {
+						consolecmd "collectionToDeck 4" ;
+					}
+
+				}
+			}
+			windowDef collectionItem_5
+			{
+				rect	565,20,60,75
+				visible	"gui::collection_item_visible_5"
+				backcolor	1,0.498,0,0.8
+
+				onMouseEnter {
+					
+					set "backcolor_w" "1" ;
+					consolecmd "updatecollectionExamine 5";
+				}
+
+				onMouseExit {
+					transition "backcolor_w" "1" "0.8" "300" ;
+				}
+
+				onAction {
+					consolecmd "collectionToDeck 5" ;
+				}
+
+				windowDef collectionItemBoost_5
+				{
+					rect	0,0,60,75
+					visible	"gui::collection_item_boost_5"
+					backcolor	0,0.494,0.494,0.8
+				}
+				windowDef collectionItemText_5
+				{
+					rect	0,0,60,75
+					visible	1
+					forecolor	1,1,1,1
+					text	"gui::collection_item_text_5"
+					textscale	0.2
+					font	"fonts/lowpixel"
+
+					onMouseEnter {
+						set "collectionItem_5::backcolor_w" "1" ;
+						consolecmd "updatecollectionExamine 5";
+					}
+
+					onMouseExit {
+						transition "collectionItem_5::backcolor_w" "1" "0.8" "300" ;
+					}
+
+					onAction {
+						consolecmd "collectionToDeck 5" ;
+					}
+
+				}
+			}
+
+
+			windowDef collectionItem_6
+			{
+				rect	231,100,60,75
+				visible	"gui::collection_item_visible_6"
+				backcolor	1,0.498,0,0.8
+
+				onMouseEnter {
+					
+					set "backcolor_w" "1" ;
+					consolecmd "updatecollectionExamine 6";
+				}
+
+				onMouseExit {
+					transition "backcolor_w" "1" "0.8" "300" ;
+				}
+
+				onAction {
+					consolecmd "collectionToDeck 6" ;
+				}
+
+				windowDef collectionItemBoost_6
+				{
+					rect	0,0,60,75
+					visible	"gui::collection_item_boost_6"
+					backcolor	0,0.494,0.494,0.8
+				}
+				windowDef collectionItemText_6
+				{
+					rect	0,0,60,75
+					visible	1
+					forecolor	1,1,1,1
+					text	"gui::collection_item_text_6"
+					textscale	0.2
+					font	"fonts/lowpixel"
+
+					onMouseEnter {
+						set "collectionItem_6::backcolor_w" "1" ;
+						consolecmd "updatecollectionExamine 6";
+					}
+
+					onMouseExit {
+						transition "collectionItem_6::backcolor_w" "1" "0.8" "300" ;
+					}
+
+					onAction {
+						consolecmd "collectionToDeck 6" ;
+					}
+
+				}
+			}
+			windowDef collectionItem_7
+			{
+				rect	301,100,60,75
+				visible	"gui::collection_item_visible_7"
+				backcolor	1,0.498,0,0.8
+
+				onMouseEnter {
+					
+					set "backcolor_w" "1" ;
+					consolecmd "updatecollectionExamine 7";
+				}
+
+				onMouseExit {
+					transition "backcolor_w" "1" "0.8" "300" ;
+				}
+
+				onAction {
+					consolecmd "collectionToDeck 7" ;
+				}
+
+				windowDef collectionItemBoost_7
+				{
+					rect	0,0,60,75
+					visible	"gui::collection_item_boost_7"
+					backcolor	0,0.494,0.494,0.8
+				}
+				windowDef collectionItemText_7
+				{
+					rect	0,0,60,75
+					visible	1
+					forecolor	1,1,1,1
+					text	"gui::collection_item_text_7"
+					textscale	0.2
+					font	"fonts/lowpixel"
+
+					onMouseEnter {
+						set "collectionItem_7::backcolor_w" "7" ;
+						consolecmd "updatecollectionExamine 7";
+					}
+
+					onMouseExit {
+						transition "collectionItem_7::backcolor_w" "1" "0.8" "300" ;
+					}
+
+					onAction {
+						consolecmd "collectionToDeck 7" ;
+					}
+
+				}
+			}
+			windowDef collectionItem_8
+			{
+				rect	371,100,60,75
+				visible	"gui::collection_item_visible_8"
+				backcolor	1,0.498,0,0.8
+
+				onMouseEnter {
+					set "backcolor_w" "1" ;
+					consolecmd "updatecollectionExamine 8";
+				}
+
+				onMouseExit {
+					transition "backcolor_w" "1" "0.8" "300" ;
+				}
+
+				onAction {
+					consolecmd "collectionToDeck 8" ;
+				}
+
+				windowDef collectionItemBoost_8
+				{
+					rect	0,0,60,75
+					visible	"gui::collection_item_boost_8"
+					backcolor	0,0.494,0.494,0.8
+				}
+				windowDef collectionItemText_8
+				{
+					rect	0,0,60,75
+					visible	1
+					forecolor	1,1,1,1
+					text	"gui::collection_item_text_8"
+					textscale	0.2
+					font	"fonts/lowpixel"
+
+					onMouseEnter {
+						set "collectionItem_8::backcolor_w" "1" ;
+						consolecmd "updatecollectionExamine 8";
+					}
+
+					onMouseExit {
+						transition "collectionItem_8::backcolor_w" "1" "0.8" "300" ;
+					}
+
+					onAction {
+						consolecmd "collectionToDeck 8" ;
+					}
+
+				}
+			}
+			windowDef collectionItem_9
+			{
+				rect	441,100,60,75
+				visible	"gui::collection_item_visible_9"
+				backcolor	1,0.498,0,0.8
+
+				onMouseEnter {
+					
+					set "backcolor_w" "1" ;
+					consolecmd "updatecollectionExamine 9";
+				}
+
+				onMouseExit {
+					transition "backcolor_w" "1" "0.8" "300" ;
+				}
+
+				onAction {
+					consolecmd "collectionToDeck 9" ;
+				}
+
+				windowDef collectionItemBoost_9
+				{
+					rect	0,0,60,75
+					visible	"gui::collection_item_boost_9"
+					backcolor	0,0.494,0.494,0.8
+				}
+				windowDef collectionItemText_9
+				{
+					rect	0,0,60,75
+					visible	1
+					forecolor	1,1,1,1
+					text	"gui::collection_item_text_9"
+					textscale	0.2
+					font	"fonts/lowpixel"
+
+					onMouseEnter {
+						set "collectionItem_9::backcolor_w" "1" ;
+						consolecmd "updatecollectionExamine 9";
+					}
+
+					onMouseExit {
+						transition "collectionItem_9::backcolor_w" "1" "0.8" "300" ;
+					}
+
+					onAction {
+						consolecmd "collectionToDeck 9" ;
+					}
+
+				}
+			}
+			windowDef collectionItem_10
+			{
+				rect	503,100,60,75
+				visible	"gui::collection_item_visible_10"
+				backcolor	1,0.498,0,0.8
+
+				onMouseEnter {
+					
+					set "backcolor_w" "1" ;
+					consolecmd "updatecollectionExamine 10";
+				}
+
+				onMouseExit {
+					transition "backcolor_w" "1" "0.8" "300" ;
+				}
+
+				onAction {
+					consolecmd "collectionToDeck 10" ;
+				}
+
+				windowDef collectionItemBoost_10
+				{
+					rect	0,0,60,75
+					visible	"gui::collection_item_boost_10"
+					backcolor	0,0.494,0.494,0.8
+				}
+				windowDef collectionItemText_10
+				{
+					rect	0,0,60,75
+					visible	1
+					forecolor	1,1,1,1
+					text	"gui::collection_item_text_10"
+					textscale	0.2
+					font	"fonts/lowpixel"
+
+					onMouseEnter {
+						set "collectionItem_10::backcolor_w" "1" ;
+						consolecmd "updatecollectionExamine 10";
+					}
+
+					onMouseExit {
+						transition "collectionItem_10::backcolor_w" "1" "0.8" "300" ;
+					}
+
+					onAction {
+						consolecmd "collectionToDeck 10" ;
+					}
+
+				}
+			}
+			windowDef collectionItem_11
+			{
+				rect	565,100,60,75
+				visible	"gui::collection_item_visible_11"
+				backcolor	1,0.498,0,0.8
+
+				onMouseEnter {
+					
+					set "backcolor_w" "1" ;
+					consolecmd "updatecollectionExamine 11";
+				}
+
+				onMouseExit {
+					transition "backcolor_w" "1" "0.8" "300" ;
+				}
+
+				onAction {
+					consolecmd "collectionToDeck 11" ;
+				}
+
+				windowDef collectionItemBoost_11
+				{
+					rect	0,0,60,75
+					visible	"gui::collection_item_boost_11"
+					backcolor	0,0.494,0.494,0.8
+				}
+				windowDef collectionItemText_11
+				{
+					rect	0,0,60,75
+					visible	1
+					forecolor	1,1,1,1
+					text	"gui::collection_item_text_11"
+					textscale	0.2
+					font	"fonts/lowpixel"
+
+					onMouseEnter {
+						set "collectionItem_5::backcolor_w" "1" ;
+						consolecmd "updatecollectionExamine 11";
+					}
+
+					onMouseExit {
+						transition "collectionItem_11::backcolor_w" "1" "0.8" "300" ;
+					}
+
+					onAction {
+						consolecmd "collectionToDeck 11" ;
+					}
+
+				}
+			}
+
+
+
+			
+			windowDef collectionItem_12
+			{
+				rect	231,180,60,75
+				visible	"gui::collection_item_visible_12"
+				backcolor	1,0.498,0,0.8
+
+				onMouseEnter {
+					
+					set "backcolor_w" "1" ;
+					consolecmd "updatecollectionExamine 12";
+				}
+
+				onMouseExit {
+					transition "backcolor_w" "1" "0.8" "300" ;
+				}
+
+				onAction {
+					consolecmd "collectionToDeck 12" ;
+				}
+
+				windowDef collectionItemBoost_12
+				{
+					rect	0,0,60,75
+					visible	"gui::collection_item_boost_12"
+					backcolor	0,0.494,0.494,0.8
+				}
+				windowDef collectionItemText_12
+				{
+					rect	0,0,60,75
+					visible	1
+					forecolor	1,1,1,1
+					text	"gui::collection_item_text_12"
+					textscale	0.2
+					font	"fonts/lowpixel"
+
+					onMouseEnter {
+						set "collectionItem_12::backcolor_w" "1" ;
+						consolecmd "updatecollectionExamine 12";
+					}
+
+					onMouseExit {
+						transition "collectionItem_12::backcolor_w" "1" "0.8" "300" ;
+					}
+
+					onAction {
+						consolecmd "collectionToDeck 12" ;
+					}
+
+				}
+			}
+			windowDef collectionItem_13
+			{
+				rect	301,180,60,75
+				visible	"gui::collection_item_visible_13"
+				backcolor	1,0.498,0,0.8
+
+				onMouseEnter {
+					
+					set "backcolor_w" "1" ;
+					consolecmd "updatecollectionExamine 13";
+				}
+
+				onMouseExit {
+					transition "backcolor_w" "1" "0.8" "300" ;
+				}
+
+				onAction {
+					consolecmd "collectionToDeck 13" ;
+				}
+
+				windowDef collectionItemBoost_13
+				{
+					rect	0,0,60,75
+					visible	"gui::collection_item_boost_13"
+					backcolor	0,0.494,0.494,0.8
+				}
+				windowDef collectionItemText_13
+				{
+					rect	0,0,60,75
+					visible	1
+					forecolor	1,1,1,1
+					text	"gui::collection_item_text_13"
+					textscale	0.2
+					font	"fonts/lowpixel"
+
+					onMouseEnter {
+						set "collectionItem_7::backcolor_w" "13" ;
+						consolecmd "updatecollectionExamine 13";
+					}
+
+					onMouseExit {
+						transition "collectionItem_13::backcolor_w" "1" "0.8" "300" ;
+					}
+
+					onAction {
+						consolecmd "collectionToDeck 13" ;
+					}
+
+				}
+			}
+			windowDef collectionItem_14
+			{
+				rect	371,180,60,75
+				visible	"gui::collection_item_visible_14"
+				backcolor	1,0.498,0,0.8
+
+				onMouseEnter {
+					set "backcolor_w" "1" ;
+					consolecmd "updatecollectionExamine 14";
+				}
+
+				onMouseExit {
+					transition "backcolor_w" "1" "0.8" "300" ;
+				}
+
+				onAction {
+					consolecmd "collectionToDeck 14" ;
+				}
+
+				windowDef collectionItemBoost_14
+				{
+					rect	0,0,60,75
+					visible	"gui::collection_item_boost_14"
+					backcolor	0,0.494,0.494,0.8
+				}
+				windowDef collectionItemText_14
+				{
+					rect	0,0,60,75
+					visible	1
+					forecolor	1,1,1,1
+					text	"gui::collection_item_text_14"
+					textscale	0.2
+					font	"fonts/lowpixel"
+
+					onMouseEnter {
+						set "collectionItem_8::backcolor_w" "1" ;
+						consolecmd "updatecollectionExamine 14";
+					}
+
+					onMouseExit {
+						transition "collectionItem_14::backcolor_w" "1" "0.8" "300" ;
+					}
+
+					onAction {
+						consolecmd "collectionToDeck 14" ;
+					}
+
+				}
+			}
+			windowDef collectionItem_15
+			{
+				rect	441,180,60,75
+				visible	"gui::collection_item_visible_15"
+				backcolor	1,0.498,0,0.8
+
+				onMouseEnter {
+					
+					set "backcolor_w" "1" ;
+					consolecmd "updatecollectionExamine 15";
+				}
+
+				onMouseExit {
+					transition "backcolor_w" "1" "0.8" "300" ;
+				}
+
+				onAction {
+					consolecmd "collectionToDeck 15" ;
+				}
+
+				windowDef collectionItemBoost_15
+				{
+					rect	0,0,60,75
+					visible	"gui::collection_item_boost_15"
+					backcolor	0,0.494,0.494,0.8
+				}
+				windowDef collectionItemText_15
+				{
+					rect	0,0,60,75
+					visible	1
+					forecolor	1,1,1,1
+					text	"gui::collection_item_text_15"
+					textscale	0.2
+					font	"fonts/lowpixel"
+
+					onMouseEnter {
+						set "collectionItem_9::backcolor_w" "1" ;
+						consolecmd "updatecollectionExamine 15";
+					}
+
+					onMouseExit {
+						transition "collectionItem_15::backcolor_w" "1" "0.8" "300" ;
+					}
+
+					onAction {
+						consolecmd "collectionToDeck 15" ;
+					}
+
+				}
+			}
+			windowDef collectionItem_16
+			{
+				rect	503,180,60,75
+				visible	"gui::collection_item_visible_16"
+				backcolor	1,0.498,0,0.8
+
+				onMouseEnter {
+					
+					set "backcolor_w" "1" ;
+					consolecmd "updatecollectionExamine 16";
+				}
+
+				onMouseExit {
+					transition "backcolor_w" "1" "0.8" "300" ;
+				}
+
+				onAction {
+					consolecmd "collectionToDeck 16" ;
+				}
+
+				windowDef collectionItemBoost_16
+				{
+					rect	0,0,60,75
+					visible	"gui::collection_item_boost_16"
+					backcolor	0,0.494,0.494,0.8
+				}
+				windowDef collectionItemText_16
+				{
+					rect	0,0,60,75
+					visible	1
+					forecolor	1,1,1,1
+					text	"gui::collection_item_text_16"
+					textscale	0.2
+					font	"fonts/lowpixel"
+
+					onMouseEnter {
+						set "collectionItem_16::backcolor_w" "1" ;
+						consolecmd "updatecollectionExamine 16";
+					}
+
+					onMouseExit {
+						transition "collectionItem_16::backcolor_w" "1" "0.8" "300" ;
+					}
+
+					onAction {
+						consolecmd "collectionToDeck 16" ;
+					}
+
+				}
+			}
+			windowDef collectionItem_17
+			{
+				rect	565,180,60,75
+				visible	"gui::collection_item_visible_17"
+				backcolor	1,0.498,0,0.8
+
+				onMouseEnter {
+					
+					set "backcolor_w" "1" ;
+					consolecmd "updatecollectionExamine 17";
+				}
+
+				onMouseExit {
+					transition "backcolor_w" "1" "0.8" "300" ;
+				}
+
+				onAction {
+					consolecmd "collectionToDeck 17" ;
+				}
+
+				windowDef collectionItemBoost_17
+				{
+					rect	0,0,60,75
+					visible	"gui::collection_item_boost_17"
+					backcolor	0,0.494,0.494,0.8
+				}
+				windowDef collectionItemText_17
+				{
+					rect	0,0,60,75
+					visible	1
+					forecolor	1,1,1,1
+					text	"gui::collection_item_text_17"
+					textscale	0.2
+					font	"fonts/lowpixel"
+
+					onMouseEnter {
+						set "collectionItem_5::backcolor_w" "1" ;
+						consolecmd "updatecollectionExamine 17";
+					}
+
+					onMouseExit {
+						transition "collectionItem_17::backcolor_w" "1" "0.8" "300" ;
+					}
+
+					onAction {
+						consolecmd "collectionToDeck 17" ;
+					}
+
+				}
+			}
+		}
+		windowDef btn_deckedit_back
+		{
+			rect	15,399,143,56
+			visible	1
+			backcolor	0,1,0.243,0.494
+			forecolor	1,1,1,1
+			text	"BACK"
+			textscale	1
+
+			onAction {
+				
+				set "p_main::visible" "1" ;
+				set "p_buttons::visible" "1" ;
+				set "p_deckedit::visible" "0" ;
+			}
+
+		}
+		windowDef cardExamineDeckedit
+		{
+			rect	8,91,208,278
+			visible	1
+			forecolor	1,1,1,1
+			backcolor	1,0.498,0,0.8
+			text	"gui::card_examine_deckedit"
+			textscale	0.8
+			font	"fonts/lowpixel"
+
+			onMouseEnter {
+				
+				set "backcolor_w" "1" ;
+				
+			}
+
+			onMouseExit {
+				transition "backcolor_w" "1" "0.8" "300" ;
+				
+			}
+
+			onAction {
+				
+			}
+
+			windowDef cardExamineDeckeditBoost
+			{
+				rect	0,0,208,278
+				visible	"gui::card_examine_deckedit_boost"
+				backcolor	0,0.498,0.498,0.8
+			}
+			windowDef cardExamineDeckeditDescription
+			{
+				rect	7,140,196,112
+				visible	1
+				forecolor	1,1,1,1
+				text	"gui::card_examine_deckedit_description"
+				textscale	0.3
+				font	"fonts/lowpixel"
+			}
+			windowDef cardExamineDeckeditHP
+			{
+				rect	106,237,98,38
+				visible	1
+				forecolor	1,1,1,1
+				text	"gui::card_examine_deckedit_hp"
+				textscale	0.4
+				font	"fonts/lowpixel"
+				textalign	2
+			}
+			windowDef cardExamineDeckeditAtk
+			{
+				rect	5,237,98,38
+				visible	1
+				forecolor	1,1,1,1
+				text	"gui::card_examine_deckedit_atk"
+				textscale	0.4
+				font	"fonts/lowpixel"
+			}
+			windowDef cardExamineDeckeditName
+			{
+				rect	6,5,193,38
+				visible	1
+				forecolor	1,1,1,1
+				text	"gui::card_examine_deckedit_name"
+				textscale	0.8
+				font	"fonts/lowpixel"
+			}
+		}
+		windowDef btn_decktocollection
+		{
+			rect	258,436,192,41
+			visible	1
+			forecolor	1,1,1,1
+			text	"COLLECTION"
+			textscale	0.6
+			backcolor	0.501,0.501,0.752,1
+
+			onAction {
+				
+				consolecmd "viewCollection" ;
+				consolecmd "displayDeckEdit" ;
+			}
+
+		}
+		windowDef btn_collectiontodeck
+		{
+			rect	165,436,87,41
+			visible	1
+			forecolor	1,1,1,1
+			text	"DECK"
+			textscale	0.6
+			backcolor	0.501,0,0.250,1
+
+			onAction {
+				
+				consolecmd "viewDeck" ;
+				consolecmd "displayDeckEdit" ;
 			}
 
 		}

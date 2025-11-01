@@ -7,7 +7,9 @@ public:
 
 	CardGameManager();
 	static Deck playerDeck;
+	static Deck playerCollection;
 	int playerMoneys;
+	int shopItems[3];
 	enum CardPoolEnum {
 		NOTAREALCARD,
 		HEALTHPAK,
@@ -27,9 +29,17 @@ public:
 		FLAG,
 		FLAGBUSTER,
 		WEAKENER,
-		SHEEPHANDS
+		SHEEPHANDS,
+		GUNNER,
+		COOLGUY,
+		DOOMGUY,
+		DOG,
+		PIZZADELIVERY,
+		FISH,
+		BLUEEYESWHITEDRAGON
+
 	};
-	static Card cardPool[19];
+	static Card cardPool[26];
 	idStr testString;
 
 };
